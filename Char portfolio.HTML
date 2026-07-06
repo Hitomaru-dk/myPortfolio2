@@ -85,6 +85,44 @@
   .logo{display:flex;flex-direction:column;gap:1px;}
   .logo-mark{font-family:var(--display);font-size:1.15rem;letter-spacing:.02em;}
   .logo-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;}
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .08em;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    background: transparent;
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--ink);
+  }
+
+  .lang-btn .lang-opt {
+    opacity: 0.4;
+    transition: opacity .2s ease, color .2s ease;
+  }
+
+  .lang-btn .lang-opt.active {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .lang-btn .lang-sep {
+    opacity: 0.2;
+  }
+
   .menu-btn{
     display:flex;align-items:center;gap:10px;
     font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
@@ -594,21 +632,28 @@
   <div class="header-inner">
     <div class="logo">
       <span class="logo-mark">NATTAKORN</span>
-      <span class="logo-sub">Frontend Dev · v2.0</span>
+      <span class="logo-sub" data-translate="logo-sub">Frontend Dev · v2.0</span>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-      <span>MENU</span>
-      <span class="menu-icon"><span></span><span></span><span></span></span>
-    </button>
+    <div class="header-actions">
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">
+        <span id="langEN" class="lang-opt active">EN</span>
+        <span class="lang-sep">|</span>
+        <span id="langTH" class="lang-opt">TH</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span data-translate="menu-text">MENU</span>
+        <span class="menu-icon"><span></span><span></span><span></span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
   <ul>
-    <li><a href="#top"><span class="nav-index">01</span>Home</a></li>
-    <li><a href="#projects"><span class="nav-index">02</span>Projects</a></li>
-    <li><a href="#about"><span class="nav-index">03</span>About</a></li>
-    <li><a href="#contact"><span class="nav-index">04</span>Contact</a></li>
+    <li><a href="#top"><span class="nav-index">01</span><span data-translate="nav-home">Home</span></a></li>
+    <li><a href="#projects"><span class="nav-index">02</span><span data-translate="nav-projects">Projects</span></a></li>
+    <li><a href="#about"><span class="nav-index">03</span><span data-translate="nav-about">About</span></a></li>
+    <li><a href="#contact"><span class="nav-index">04</span><span data-translate="nav-contact">Contact</span></a></li>
   </ul>
 </nav>
 
@@ -624,7 +669,7 @@
 
   <div class="hero-grid">
     <div class="hero-left">
-      <div class="eyebrow" style="margin-bottom:14px;">Digital Industry — Frontend / UX</div>
+      <div class="eyebrow" style="margin-bottom:14px;" data-translate="hero-eyebrow">Digital Industry — Frontend / UX</div>
       <div class="hero-tags">
         <span class="tag">[ REACT ]</span>
         <span class="tag">[ TYPESCRIPT ]</span>
@@ -632,45 +677,45 @@
         <span class="tag">[ UI/UX ]</span>
       </div>
       <h1 class="hero-title">NATTAKORN</h1>
-      <p class="hero-tagline">Building clean, purposeful frontend experiences — one deliberate interface at a time.</p>
+      <p class="hero-tagline" data-translate="hero-tagline">Building clean, purposeful frontend experiences — one deliberate interface at a time.</p>
       <div class="status-row">
         <span class="status-dot"></span>
-        <span class="status-text">Available for co-op / internship</span>
+        <span class="status-text" data-translate="hero-status">Available for co-op / internship</span>
       </div>
     </div>
 
     <div class="hero-photo frame">
       <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
       <span class="plus p1">+</span><span class="plus p2">+</span>
-      <p>[ Portrait ]<br>Add your photo here</p>
+      <p data-translate="hero-portrait">[ Portrait ]<br>Add your photo here</p>
     </div>
 
     <div class="spec-rail">
       <div class="spec-row" style="--i:1">
-        <div class="spec-label">Unit</div>
+        <div class="spec-label" data-translate="spec-unit-lbl">Unit</div>
         <div class="spec-value">NATTAKORN</div>
       </div>
       <div class="spec-row" style="--i:2">
-        <div class="spec-label">Role</div>
-        <div class="spec-value">Frontend Developer</div>
+        <div class="spec-label" data-translate="spec-role-lbl">Role</div>
+        <div class="spec-value" data-translate="spec-role-val">Frontend Developer</div>
       </div>
       <div class="spec-row" style="--i:3">
-        <div class="spec-label">Focus</div>
-        <div class="spec-value small">React · UI/UX · Web Apps</div>
+        <div class="spec-label" data-translate="spec-focus-lbl">Focus</div>
+        <div class="spec-value small" data-translate="spec-focus-val">React · UI/UX · Web Apps</div>
       </div>
       <div class="spec-row" style="--i:4">
-        <div class="spec-label">Based</div>
-        <div class="spec-value">Thailand</div>
+        <div class="spec-label" data-translate="spec-based-lbl">Based</div>
+        <div class="spec-value" data-translate="spec-based-val">Thailand</div>
       </div>
       <div class="spec-row" style="--i:5">
-        <div class="spec-label">Education</div>
-        <div class="spec-value small">CAMT, Chiang Mai University</div>
+        <div class="spec-label" data-translate="spec-edu-lbl">Education</div>
+        <div class="spec-value small" data-translate="spec-edu-val">CAMT, Chiang Mai University</div>
       </div>
     </div>
   </div>
 
   <a href="#projects" class="scroll-cue">
-    <span>Scroll</span>
+    <span data-translate="scroll-cue">Scroll</span>
     <span class="scroll-line"></span>
   </a>
 </section>
@@ -679,7 +724,7 @@
 <section id="projects">
   <div class="wrap">
     <div class="sec-head">
-      <h2>PROJECTS</h2>
+      <h2 data-translate="projects-heading">PROJECTS</h2>
       <span class="idx">// 01</span>
     </div>
 
@@ -734,7 +779,7 @@
   <div class="split">
     <div>
       <div class="sec-head" style="margin-bottom:26px;">
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">ABOUT</h2>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);" data-translate="about-heading">ABOUT</h2>
         <span class="idx">// 02</span>
       </div>
       <div class="about-photo frame">
@@ -748,14 +793,14 @@
           </g>
         </svg>
       </div>
-      <div class="about-cap">Frontend / UX — 2026</div>
-      <p class="about-statement">I build interfaces that feel deliberate, not default.</p>
-      <p class="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
+      <div class="about-cap" data-translate="about-caption">Frontend / UX — 2026</div>
+      <p class="about-statement" data-translate="about-statement">I build interfaces that feel deliberate, not default.</p>
+      <p class="about-sub" data-translate="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
     </div>
 
     <div>
       <div class="sec-head" style="margin-bottom:26px;">
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">SKILLS</h2>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);" data-translate="skills-heading">SKILLS</h2>
         <span class="idx">// 03</span>
       </div>
       <ul class="skill-list">
@@ -791,23 +836,23 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <h2>CONTACT</h2>
+      <h2 data-translate="contact-heading">CONTACT</h2>
       <span class="idx">// 04</span>
     </div>
     <div class="contact-grid">
-      <p class="contact-heading">Let's build something worth shipping.</p>
+      <p class="contact-heading" data-translate="contact-tagline">Let's build something worth shipping.</p>
 
       <div class="contact-links">
         <div>
-          <div class="spec-label">Email</div>
+          <div class="spec-label" data-translate="contact-email">Email</div>
           <a class="spec-value" href="mailto:you@email.com">you@email.com</a>
         </div>
         <div>
-          <div class="spec-label">GitHub</div>
+          <div class="spec-label" data-translate="contact-github">GitHub</div>
           <a class="spec-value" href="https://github.com/Hitomaru-dk" target="_blank" rel="noopener">@Hitomaru-dk</a>
         </div>
         <div>
-          <div class="spec-label">LinkedIn</div>
+          <div class="spec-label" data-translate="contact-linkedin">LinkedIn</div>
           <a class="spec-value" href="#">linkedin.com/in/yourname</a>
         </div>
       </div>
@@ -834,13 +879,13 @@
 
 <footer class="wrap">
   <div class="footer-row">
-    <div class="footer-left">© 2026 NATTAKORN. ALL RIGHTS RESERVED.</div>
+    <div class="footer-left" data-translate="footer-copy">© 2026 NATTAKORN. ALL RIGHTS RESERVED.</div>
     <div class="footer-stats">
-      <div>LOCAL TIME <span id="clock">--:--:--</span></div>
-      <div>STATUS <span>AVAILABLE</span></div>
-      <div>BUILD <span>v2.0.26</span></div>
+      <div><span data-translate="footer-time">LOCAL TIME</span> <span id="clock">--:--:--</span></div>
+      <div><span data-translate="footer-status-lbl">STATUS</span> <span data-translate="footer-status-val">AVAILABLE</span></div>
+      <div><span data-translate="footer-build">BUILD</span> <span>v2.0.26</span></div>
     </div>
-    <a href="#top" class="back-top">Back to top ↑</a>
+    <a href="#top" class="back-top" data-translate="footer-top">Back to top ↑</a>
   </div>
 </footer>
 
@@ -849,7 +894,7 @@
   <div class="modal-backdrop" id="modalBackdrop"></div>
   <div class="modal-container frame">
     <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
-    <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">CLOSE [X]</button>
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close modal" data-translate="modal-close">CLOSE [X]</button>
     <div class="modal-content-grid" id="modalContent">
       <!-- Dynamically populated by JS -->
     </div>
@@ -889,14 +934,119 @@
   tick();
   setInterval(tick, 1000);
 
+  // Multi-language system
+  const translations = {
+    en: {
+      "logo-sub": "Frontend Dev · v2.0",
+      "menu-text": "MENU",
+      "nav-home": "Home",
+      "nav-projects": "Projects",
+      "nav-about": "About",
+      "nav-contact": "Contact",
+      "hero-eyebrow": "Digital Industry — Frontend / UX",
+      "hero-tagline": "Building clean, purposeful frontend experiences — one deliberate interface at a time.",
+      "hero-status": "Available for co-op / internship",
+      "hero-portrait": "[ Portrait ]<br>Add your photo here",
+      "spec-unit-lbl": "Unit",
+      "spec-role-lbl": "Role",
+      "spec-role-val": "Frontend Developer",
+      "spec-focus-lbl": "Focus",
+      "spec-focus-val": "React · UI/UX · Web Apps",
+      "spec-based-lbl": "Based",
+      "spec-based-val": "Thailand",
+      "spec-edu-lbl": "Education",
+      "spec-edu-val": "CAMT, Chiang Mai University",
+      "scroll-cue": "Scroll",
+      "projects-heading": "PROJECTS",
+      "about-heading": "ABOUT",
+      "about-caption": "Frontend / UX — 2026",
+      "about-statement": "I build interfaces that feel deliberate, not default.",
+      "about-sub": "CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.",
+      "skills-heading": "SKILLS",
+      "contact-heading": "CONTACT",
+      "contact-tagline": "Let's build something worth shipping.",
+      "contact-email": "Email",
+      "contact-github": "GitHub",
+      "contact-linkedin": "LinkedIn",
+      "footer-copy": "© 2026 NATTAKORN. ALL RIGHTS RESERVED.",
+      "footer-time": "LOCAL TIME",
+      "footer-status-lbl": "STATUS",
+      "footer-status-val": "AVAILABLE",
+      "footer-build": "BUILD",
+      "footer-top": "Back to top ↑",
+      "modal-close": "CLOSE [X]",
+      "read-details": "Read Details [↗]",
+      "view-repo": "View Repository →"
+    },
+    th: {
+      "logo-sub": "นักพัฒนาฟรอนต์เอนด์ · v2.0",
+      "menu-text": "เมนู",
+      "nav-home": "หน้าแรก",
+      "nav-projects": "ผลงาน",
+      "nav-about": "เกี่ยวกับฉัน",
+      "nav-contact": "ติดต่อ",
+      "hero-eyebrow": "อุตสาหกรรมดิจิทัล — ฟรอนต์เอนด์ / UX",
+      "hero-tagline": "สร้างสรรค์ประสบการณ์ฟรอนต์เอนด์ที่สะอาดตาและมีจุดหมาย — ทีละอินเตอร์เฟซอย่างตั้งใจ",
+      "hero-status": "พร้อมสำหรับการฝึกงาน / สหกิจศึกษา",
+      "hero-portrait": "[ รูปภาพส่วนตัว ]<br>เพิ่มรูปถ่ายของคุณที่นี่",
+      "spec-unit-lbl": "บุคคล",
+      "spec-role-lbl": "บทบาท",
+      "spec-role-val": "นักพัฒนาฟรอนต์เอนด์",
+      "spec-focus-lbl": "เน้นย้ำ",
+      "spec-focus-val": "React · UI/UX · เว็บแอปพลิเคชัน",
+      "spec-based-lbl": "ที่ตั้ง",
+      "spec-based-val": "ประเทศไทย",
+      "spec-edu-lbl": "การศึกษา",
+      "spec-edu-val": "CAMT, มหาวิทยาลัยเชียงใหม่",
+      "scroll-cue": "เลื่อนลง",
+      "projects-heading": "ผลงาน",
+      "about-heading": "เกี่ยวกับฉัน",
+      "about-caption": "ฟรอนต์เอนด์ / UX — 2026",
+      "about-statement": "ผมสร้างสรรค์หน้าเว็บที่ตั้งใจออกแบบ ไม่ใช่แค่ใช้ค่าเริ่มต้น",
+      "about-sub": "วิทยาลัยศิลปะ สื่อ และเทคโนโลยี (CAMT) สาขา DII มหาวิทยาลัยเชียงใหม่ กำลังมองหาตำแหน่งงานสหกิจศึกษาในฐานะนักพัฒนาฟรอนต์เอนด์",
+      "skills-heading": "ทักษะ",
+      "contact-heading": "ติดต่อ",
+      "contact-tagline": "มาร่วมกันสร้างสรรค์ผลงานชิ้นเอกกันเถอะ",
+      "contact-email": "อีเมล",
+      "contact-github": "กิตฮับ",
+      "contact-linkedin": "ลิงก์อิน",
+      "footer-copy": "© 2026 NATTAKORN. สงวนลิขสิทธิ์ทั้งหมด",
+      "footer-time": "เวลาท้องถิ่น",
+      "footer-status-lbl": "สถานะ",
+      "footer-status-val": "พร้อมทำงาน",
+      "footer-build": "เวอร์ชัน",
+      "footer-top": "กลับสู่ด้านบน ↑",
+      "modal-close": "ปิด [X]",
+      "read-details": "อ่านรายละเอียด [↗]",
+      "view-repo": "ดูรีโพสิทอรี →"
+    }
+  };
+
+  let currentLang = 'en';
+
   // Projects data
   const projectsData = [
     {
-      tag: "Featured — Project 01",
-      title: "ShowPro",
-      desc: "Student portfolio & co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.",
-      role: "UX Engineer",
-      stack: "React / Vite / TS / Tailwind",
+      tag: {
+        en: "Featured — Project 01",
+        th: "ผลงานเด่น — โปรเจกต์ 01"
+      },
+      title: {
+        en: "ShowPro",
+        th: "ShowPro"
+      },
+      desc: {
+        en: "Student portfolio & co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.",
+        th: "แพลตฟอร์มการจัดการพอร์ตโฟลิโอและสหกิจศึกษาสำหรับ CAMT / DII พัฒนาส่วนติดต่อผู้ใช้งานทั้งหมด เช่น การ์ดผลงานที่แก้ไขได้ โหมดมืด และการสลับภาษาไทย/อังกฤษเต็มรูปแบบ"
+      },
+      role: {
+        en: "UX Engineer",
+        th: "วิศวกร UX"
+      },
+      stack: {
+        en: "React / Vite / TS / Tailwind",
+        th: "React / Vite / TS / Tailwind"
+      },
       link: "https://github.com/PreturnPRO/dii-camt-showprogroup",
       figLabel: "FIG. 01 — SHOWPRO",
       svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -917,11 +1067,26 @@
         </svg>`
     },
     {
-      tag: "Project 02",
-      title: "M-SPEC",
-      desc: "E-commerce & dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.",
-      role: "Frontend Developer",
-      stack: "JS · Node · Express · SQLite",
+      tag: {
+        en: "Project 02",
+        th: "โปรเจกต์ 02"
+      },
+      title: {
+        en: "M-SPEC",
+        th: "M-SPEC"
+      },
+      desc: {
+        en: "E-commerce & dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.",
+        th: "เว็บไซต์อีคอมเมิร์ซและจองคิวจูนไดโนสำหรับอู่รถยนต์ในพื้นที่ ประกอบด้วยระบบจองแบบป๊อปอัป แถบเลื่อนอะไหล่แบบวิ่ง และฟังก์ชันการยกเลิก/จองใหม่"
+      },
+      role: {
+        en: "Frontend Developer",
+        th: "นักพัฒนาฟรอนต์เอนด์"
+      },
+      stack: {
+        en: "JS · Node · Express · SQLite",
+        th: "JS · Node · Express · SQLite"
+      },
       link: "#",
       figLabel: "FIG. 02 — M-SPEC",
       svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -944,11 +1109,26 @@
         </svg>`
     },
     {
-      tag: "Project 03",
-      title: "Feane",
-      desc: "E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.",
-      role: "Fullstack Developer",
-      stack: "Bootstrap · jQuery · Express",
+      tag: {
+        en: "Project 03",
+        th: "โปรเจกต์ 03"
+      },
+      title: {
+        en: "Feane",
+        th: "Feane"
+      },
+      desc: {
+        en: "E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.",
+        th: "ร้านค้าออนไลน์อีคอมเมิร์ซพร้อมระบบการลงชื่อเข้าใช้งานเต็มรูปแบบ เชื่อมต่อฐานข้อมูล SQLite และการออกแบบฐานข้อมูลโดยอ้างอิงจากแผนภาพ ERD"
+      },
+      role: {
+        en: "Fullstack Developer",
+        th: "นักพัฒนาฟูลสแตก"
+      },
+      stack: {
+        en: "Bootstrap · jQuery · Express",
+        th: "Bootstrap · jQuery · Express"
+      },
       link: "#",
       figLabel: "FIG. 03 — FEANE",
       svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -974,11 +1154,26 @@
         </svg>`
     },
     {
-      tag: "Project 04",
-      title: "RevRoute",
-      desc: "Gamified driving-safety app concept with crash detection — pitched Shark-Tank style.",
-      role: "Product / Pitch",
-      stack: "Product · Pitch Deck",
+      tag: {
+        en: "Project 04",
+        th: "โปรเจกต์ 04"
+      },
+      title: {
+        en: "RevRoute",
+        th: "RevRoute"
+      },
+      desc: {
+        en: "Gamified driving-safety app concept with crash detection — pitched Shark-Tank style.",
+        th: "แนวคิดแอปพลิเคชันเพื่อความปลอดภัยในการขับขี่ที่ใช้กลไกเกม (Gamification) พร้อมระบบตรวจจับการชน โดยนำเสนอโครงการในรูปแบบของ Shark Tank"
+      },
+      role: {
+        en: "Product / Pitch",
+        th: "ผู้ออกแบบผลิตภัณฑ์ / การนำเสนอ"
+      },
+      stack: {
+        en: "Product · Pitch Deck",
+        th: "ผลิตภัณฑ์ · สไลด์นำเสนอ"
+      },
       link: "#",
       figLabel: "FIG. 04 — REVROUTE",
       svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -996,73 +1191,82 @@
           <circle cx="270" cy="100" r="5" fill="#c1461b"/>
           <circle cx="270" cy="100" r="12" fill="none" stroke="#c1461b" stroke-width="1" opacity="0.6"/>
         </svg>`
+      }
+    ];
+
+    let currentProjectIndex = 0;
+
+    const modal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalNextBtn = document.getElementById('modalNextBtn');
+
+    function openProjectModal(index) {
+      currentProjectIndex = index;
+      renderModalProject(index);
+      if (modal) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+      document.body.style.overflow = 'hidden';
     }
-  ];
 
-  let currentProjectIndex = 0;
-
-  const modal = document.getElementById('projectModal');
-  const modalContent = document.getElementById('modalContent');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  const modalNextBtn = document.getElementById('modalNextBtn');
-
-  function openProjectModal(index) {
-    currentProjectIndex = index;
-    renderModalProject(index);
-    if (modal) {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
+    function closeProjectModal() {
+      if (modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      document.body.style.overflow = '';
     }
-    document.body.style.overflow = 'hidden';
-  }
 
-  function closeProjectModal() {
-    if (modal) {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
+
+    if (modalNextBtn) {
+      modalNextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nextIndex = (currentProjectIndex + 1) % projectsData.length;
+        renderModalProject(nextIndex);
+      });
     }
-    document.body.style.overflow = '';
-  }
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
-  if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
-  
-  if (modalNextBtn) {
-    modalNextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const nextIndex = (currentProjectIndex + 1) % projectsData.length;
-      renderModalProject(nextIndex);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+        closeProjectModal();
+      }
     });
-  }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
-      closeProjectModal();
-    }
-  });
+    function renderModalProject(index) {
+      currentProjectIndex = index;
+      const project = projectsData[index];
+      if (!modalContent) return;
 
-  function renderModalProject(index) {
-    currentProjectIndex = index;
-    const project = projectsData[index];
-    if (!modalContent) return;
+      const tag = typeof project.tag === 'object' ? project.tag[currentLang] : project.tag;
+      const title = typeof project.title === 'object' ? project.title[currentLang] : project.title;
+      const desc = typeof project.desc === 'object' ? project.desc[currentLang] : project.desc;
+      const role = typeof project.role === 'object' ? project.role[currentLang] : project.role;
+      const stack = typeof project.stack === 'object' ? project.stack[currentLang] : project.stack;
+      const viewRepoText = translations[currentLang]["view-repo"];
+      const roleLabel = translations[currentLang]["spec-role-lbl"];
+      const stackLabel = translations[currentLang]["spec-focus-lbl"];
 
-    modalContent.innerHTML = `
+      modalContent.innerHTML = `
       <div class="pf-meta">
-        <div class="pf-tag">${project.tag}</div>
-        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${project.title}</h3>
-        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${project.desc}</p>
+        <div class="pf-tag">${tag}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${title}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${desc}</p>
         <div class="pf-facts" style="margin-bottom: 24px;">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${project.role}</span>
+            <span class="spec-label">${roleLabel}</span>
+            <span class="spec-value">${role}</span>
           </div>
           <div>
-            <span class="spec-label">Stack</span>
-            <span class="spec-value">${project.stack}</span>
+            <span class="spec-label">${stackLabel}</span>
+            <span class="spec-value">${stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="${project.link}" target="_blank" rel="noopener">View Repository →</a>
+        <a class="pf-link" href="${project.link}" target="_blank" rel="noopener">${viewRepoText}</a>
       </div>
       <div class="pf-visual frame">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1072,39 +1276,48 @@
       </div>
     `;
 
-    // Highlight active card in grid
-    const cards = document.querySelectorAll('.p-card');
-    cards.forEach((card, idx) => {
-      if (idx === index) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
-      }
-    });
-  }
+      // Highlight active card in grid
+      const cards = document.querySelectorAll('.p-card');
+      cards.forEach((card, idx) => {
+        if (idx === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    }
 
-  const previewArea = document.getElementById('activeProjectArea');
+    const previewArea = document.getElementById('activeProjectArea');
 
-  function renderPreviewProject(index) {
-    const project = projectsData[index];
-    if (!previewArea) return;
+    function renderPreviewProject(index) {
+      const project = projectsData[index];
+      if (!previewArea) return;
 
-    previewArea.innerHTML = `
+      const tag = typeof project.tag === 'object' ? project.tag[currentLang] : project.tag;
+      const title = typeof project.title === 'object' ? project.title[currentLang] : project.title;
+      const desc = typeof project.desc === 'object' ? project.desc[currentLang] : project.desc;
+      const role = typeof project.role === 'object' ? project.role[currentLang] : project.role;
+      const stack = typeof project.stack === 'object' ? project.stack[currentLang] : project.stack;
+      const readDetailsText = translations[currentLang]["read-details"];
+      const roleLabel = translations[currentLang]["spec-role-lbl"];
+      const stackLabel = translations[currentLang]["spec-focus-lbl"];
+
+      previewArea.innerHTML = `
       <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
-        <div class="pf-tag">${project.tag}</div>
-        <h3 class="pf-title">${project.title}</h3>
-        <p class="pf-desc">${project.desc}</p>
+        <div class="pf-tag">${tag}</div>
+        <h3 class="pf-title">${title}</h3>
+        <p class="pf-desc">${desc}</p>
         <div class="pf-facts">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${project.role}</span>
+            <span class="spec-label">${roleLabel}</span>
+            <span class="spec-value">${role}</span>
           </div>
           <div>
-            <span class="spec-label">Stack</span>
-            <span class="spec-value">${project.stack}</span>
+            <span class="spec-label">${stackLabel}</span>
+            <span class="spec-value">${stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">Read Details [↗]</a>
+        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">${readDetailsText}</a>
       </div>
       <div class="pf-visual frame" id="featuredVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1114,108 +1327,162 @@
       </div>
     `;
 
-    // Re-bind triggers for the new content inside previewArea
-    const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
-    const featuredVisualBtn = document.getElementById('featuredVisualBtn');
+      // Re-bind triggers for the new content inside previewArea
+      const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
+      const featuredVisualBtn = document.getElementById('featuredVisualBtn');
 
-    if (featuredDetailsBtn) {
-      featuredDetailsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openProjectModal(index);
-      });
-    }
-    if (featuredVisualBtn) {
-      featuredVisualBtn.addEventListener('click', () => {
-        openProjectModal(index);
-      });
-    }
-
-    // Highlight active card in grid
-    const cards = document.querySelectorAll('.p-card');
-    cards.forEach((card, idx) => {
-      if (idx === index) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
+      if (featuredDetailsBtn) {
+        featuredDetailsBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openProjectModal(index);
+        });
       }
-    });
-  }
+      if (featuredVisualBtn) {
+        featuredVisualBtn.addEventListener('click', () => {
+          openProjectModal(index);
+        });
+      }
 
-  function renderGrid() {
-    const grid = document.getElementById('projectGrid');
-    if (!grid) return;
-    
-    grid.innerHTML = projectsData.map((project, idx) => {
-      return `
+      // Highlight active card in grid
+      const cards = document.querySelectorAll('.p-card');
+      cards.forEach((card, idx) => {
+        if (idx === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('projectGrid');
+      if (!grid) return;
+
+      grid.innerHTML = projectsData.map((project, idx) => {
+        const tag = typeof project.tag === 'object' ? project.tag[currentLang] : project.tag;
+        const title = typeof project.title === 'object' ? project.title[currentLang] : project.title;
+        const desc = typeof project.desc === 'object' ? project.desc[currentLang] : project.desc;
+        const stack = typeof project.stack === 'object' ? project.stack[currentLang] : project.stack;
+        const truncatedDesc = desc.length > 90 ? desc.substring(0, 87) + '...' : desc;
+
+        return `
         <div class="p-card" data-index="${idx}">
           <div>
-            <div class="p-tag">${project.tag}</div>
-            <h3>${project.title}</h3>
-            <p>${project.desc.length > 90 ? project.desc.substring(0, 87) + '...' : project.desc}</p>
+            <div class="p-tag">${tag}</div>
+            <h3>${title}</h3>
+            <p>${truncatedDesc}</p>
           </div>
-          <div class="p-stack">${project.stack.toUpperCase()}</div>
+          <div class="p-stack">${stack.toUpperCase()}</div>
           <span class="plus">+</span>
         </div>
       `;
-    }).join('');
+      }).join('');
 
-    // Attach event listeners to cards
-    const cards = grid.querySelectorAll('.p-card');
-    cards.forEach((card) => {
-      card.addEventListener('click', () => {
-        const index = parseInt(card.getAttribute('data-index'), 10);
-        openProjectModal(index);
+      // Attach event listeners to cards
+      const cards = grid.querySelectorAll('.p-card');
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const index = parseInt(card.getAttribute('data-index'), 10);
+          openProjectModal(index);
+        });
+        card.addEventListener('mouseenter', () => {
+          const index = parseInt(card.getAttribute('data-index'), 10);
+          renderPreviewProject(index);
+        });
       });
-      card.addEventListener('mouseenter', () => {
-        const index = parseInt(card.getAttribute('data-index'), 10);
-        renderPreviewProject(index);
+    }
+
+    // Language switcher handler
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      const langEN = document.getElementById('langEN');
+      const langTH = document.getElementById('langTH');
+      if (langEN && langTH) {
+        if (lang === 'en') {
+          langEN.classList.add('active');
+          langTH.classList.remove('active');
+        } else {
+          langTH.classList.add('active');
+          langEN.classList.remove('active');
+        }
+      }
+
+      document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+          if (key === 'hero-portrait') {
+            el.innerHTML = translations[lang][key];
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
       });
-    });
-  }
 
-  // Initialize projects list and highlight first project
-  renderGrid();
-  renderPreviewProject(0);
-
-  // custom cursor implementation
-  const cursor = document.getElementById('customCursor');
-  if (cursor && window.matchMedia('(pointer: fine)').matches) {
-    document.documentElement.classList.add('custom-cursor-enabled');
-    
-    let hasMoved = false;
-
-    window.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      if (!hasMoved) {
-        hasMoved = true;
-        cursor.style.opacity = '1';
+      renderGrid();
+      
+      const activeCard = document.querySelector('.p-card.active');
+      const activeIdx = activeCard ? parseInt(activeCard.getAttribute('data-index'), 10) : 0;
+      renderPreviewProject(activeIdx);
+      
+      if (modal && modal.classList.contains('open')) {
+        renderModalProject(currentProjectIndex);
       }
-    });
+      
+      localStorage.setItem('portfolio-lang', lang);
+    }
 
-    // Hover state detection
-    const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .pf-link, .back-top, .p-card';
-    
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(clickables)) {
-        cursor.classList.add('hover');
-      }
-    });
+    const langBtn = document.getElementById('langBtn');
+    if (langBtn) {
+      langBtn.addEventListener('click', () => {
+        const targetLang = currentLang === 'en' ? 'th' : 'en';
+        setLanguage(targetLang);
+      });
+    }
 
-    document.addEventListener('mouseout', (e) => {
-      if (!e.target.closest(clickables)) {
-        cursor.classList.remove('hover');
-      }
-    });
+    // Initialize default language
+    const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+    setLanguage(savedLang);
 
-    document.addEventListener('mouseleave', () => {
-      cursor.style.opacity = '0';
-    });
+    // custom cursor implementation
+    const cursor = document.getElementById('customCursor');
+    if (cursor && window.matchMedia('(pointer: fine)').matches) {
+      document.documentElement.classList.add('custom-cursor-enabled');
 
-    document.addEventListener('mouseenter', () => {
-      if (hasMoved) cursor.style.opacity = '1';
-    });
-  }
+      let hasMoved = false;
+
+      window.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        if (!hasMoved) {
+          hasMoved = true;
+          cursor.style.opacity = '1';
+        }
+      });
+
+      // Hover state detection
+      const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .lang-btn, .pf-link, .back-top, .p-card';
+
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(clickables)) {
+          cursor.classList.add('hover');
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        if (!e.target.closest(clickables)) {
+          cursor.classList.remove('hover');
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+      });
+
+      document.addEventListener('mouseenter', () => {
+        if (hasMoved) cursor.style.opacity = '1';
+      });
+    }
 </script>
 </body>
 </html>
