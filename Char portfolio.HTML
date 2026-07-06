@@ -386,11 +386,125 @@
     margin-left: -12px;
     margin-top: -12px;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 200000;
     color: var(--ink);
     opacity: 0;
     transform: scale(1);
     transition: color 0.2s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  }
+
+  /* ===== Project Modal ===== */
+  .project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99990;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(20px, 4vw, 40px);
+  }
+  .project-modal.open {
+    display: flex;
+  }
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 11, 8, 0.6);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+  }
+  .modal-container {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    width: 100%;
+    max-width: 960px;
+    position: relative;
+    z-index: 99995;
+    padding: clamp(24px, 5vw, 56px);
+    box-shadow: 0 30px 70px rgba(11, 11, 8, 0.3);
+    animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .2s ease;
+    z-index: 100000;
+  }
+  .modal-close:hover {
+    color: var(--signal) !important;
+    border-color: var(--signal) !important;
+  }
+  .modal-content-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .modal-next-btn {
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100005;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(22, 22, 15, 0.15);
+    transition: all .25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .modal-next-btn:hover {
+    background: var(--signal) !important;
+    color: var(--paper) !important;
+    border-color: var(--signal) !important;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  @media (max-width: 1000px) {
+    .modal-content-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .modal-next-btn {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin: 20px auto 0;
+      width: 100%;
+      height: 48px;
+      border-radius: 0;
+    }
+    .modal-next-btn:hover {
+      transform: scale(1.02);
+    }
   }
   .custom-cursor svg {
     width: 100%;
@@ -543,7 +657,7 @@
       <span class="idx">// 01</span>
     </div>
 
-    <div class="project-feature" id="activeProjectArea">
+    <div class="project-feature">
       <div class="pf-meta">
         <div class="pf-tag">Featured — Project 01</div>
         <h3 class="pf-title">ShowPro</h3>
@@ -558,9 +672,9 @@
             <span class="spec-value">React / Vite / TS / Tailwind</span>
           </div>
         </div>
-        <a class="pf-link" href="https://github.com/PreturnPRO/dii-camt-showprogroup" target="_blank" rel="noopener">View Repository →</a>
+        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">Read Details [↗]</a>
       </div>
-      <div class="pf-visual frame">
+      <div class="pf-visual frame" id="featuredVisualBtn" style="cursor: pointer;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
         <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -580,10 +694,6 @@
           <line x1="200" y1="220" x2="200" y2="280" stroke="#8f8d80" stroke-width="1"/>
         </svg>
         <span class="pf-visual-label">FIG. 01 — SHOWPRO</span>
-        <button class="pf-next-btn" id="nextProjectBtn" aria-label="Next Project">
-          <span>Next Project</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
       </div>
     </div>
 
@@ -707,6 +817,21 @@
     <a href="#top" class="back-top">Back to top ↑</a>
   </div>
 </footer>
+
+<!-- ============ PROJECT MODAL ============ -->
+<div class="project-modal" id="projectModal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-container frame">
+    <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">CLOSE [X]</button>
+    <div class="modal-content-grid" id="modalContent">
+      <!-- Dynamically populated by JS -->
+    </div>
+    <button class="modal-next-btn" id="modalNextBtn" aria-label="Next Project">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </button>
+  </div>
+</div>
 
 <script>
   // mobile / overlay menu
@@ -850,18 +975,58 @@
 
   let currentProjectIndex = 0;
 
-  function renderProject(index) {
+  const modal = document.getElementById('projectModal');
+  const modalContent = document.getElementById('modalContent');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalNextBtn = document.getElementById('modalNextBtn');
+
+  function openProjectModal(index) {
+    currentProjectIndex = index;
+    renderModalProject(index);
+    if (modal) {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjectModal() {
+    if (modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.style.overflow = '';
+  }
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
+  
+  if (modalNextBtn) {
+    modalNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIndex = (currentProjectIndex + 1) % projectsData.length;
+      renderModalProject(nextIndex);
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+      closeProjectModal();
+    }
+  });
+
+  function renderModalProject(index) {
     currentProjectIndex = index;
     const project = projectsData[index];
-    const featureArea = document.getElementById('activeProjectArea');
-    if (!featureArea) return;
+    if (!modalContent) return;
 
-    featureArea.innerHTML = `
+    modalContent.innerHTML = `
       <div class="pf-meta">
         <div class="pf-tag">${project.tag}</div>
-        <h3 class="pf-title">${project.title}</h3>
-        <p class="pf-desc">${project.desc}</p>
-        <div class="pf-facts">
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${project.title}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${project.desc}</p>
+        <div class="pf-facts" style="margin-bottom: 24px;">
           <div>
             <span class="spec-label">Role</span>
             <span class="spec-value">${project.role}</span>
@@ -877,25 +1042,11 @@
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
         ${project.svg}
-        <span class="pf-visual-label">${project.figLabel}</span>
-        <button class="pf-next-btn" id="nextProjectBtn" aria-label="Next Project">
-          <span>Next Project</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
+        <span class="pf-visual-label" style="bottom: 12px; right: 12px;">${project.figLabel}</span>
       </div>
     `;
 
-    // Re-attach event listener to next project button
-    const nextBtn = document.getElementById('nextProjectBtn');
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const nextIndex = (currentProjectIndex + 1) % projectsData.length;
-        renderProject(nextIndex);
-      });
-    }
-
-    // Update active state in cards grid
+    // Highlight active card in grid
     const cards = document.querySelectorAll('.p-card');
     cards.forEach((card, idx) => {
       if (idx === index) {
@@ -929,20 +1080,29 @@
     cards.forEach((card) => {
       card.addEventListener('click', () => {
         const index = parseInt(card.getAttribute('data-index'), 10);
-        renderProject(index);
-        
-        // Scroll to the active project area smoothly
-        const activeArea = document.getElementById('activeProjectArea');
-        if (activeArea) {
-          activeArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        openProjectModal(index);
       });
     });
   }
 
-  // Initialize projects list and active project
+  // Bind featured project main triggers
+  const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
+  const featuredVisualBtn = document.getElementById('featuredVisualBtn');
+
+  if (featuredDetailsBtn) {
+    featuredDetailsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openProjectModal(0);
+    });
+  }
+  if (featuredVisualBtn) {
+    featuredVisualBtn.addEventListener('click', () => {
+      openProjectModal(0);
+    });
+  }
+
+  // Initialize projects list
   renderGrid();
-  renderProject(0);
 
   // custom cursor implementation
   const cursor = document.getElementById('customCursor');
