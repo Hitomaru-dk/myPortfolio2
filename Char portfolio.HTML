@@ -506,6 +506,18 @@
       transform: scale(1.02);
     }
   }
+
+  @keyframes previewFadeIn {
+    from {
+      opacity: 0.85;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .custom-cursor svg {
     width: 100%;
     height: 100%;
@@ -657,7 +669,7 @@
       <span class="idx">// 01</span>
     </div>
 
-    <div class="project-feature">
+    <div class="project-feature" id="activeProjectArea">
       <div class="pf-meta">
         <div class="pf-tag">Featured — Project 01</div>
         <h3 class="pf-title">ShowPro</h3>
@@ -1057,6 +1069,64 @@
     });
   }
 
+  const previewArea = document.getElementById('activeProjectArea');
+
+  function renderPreviewProject(index) {
+    const project = projectsData[index];
+    if (!previewArea) return;
+
+    previewArea.innerHTML = `
+      <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
+        <div class="pf-tag">${project.tag}</div>
+        <h3 class="pf-title">${project.title}</h3>
+        <p class="pf-desc">${project.desc}</p>
+        <div class="pf-facts">
+          <div>
+            <span class="spec-label">Role</span>
+            <span class="spec-value">${project.role}</span>
+          </div>
+          <div>
+            <span class="spec-label">Stack</span>
+            <span class="spec-value">${project.stack}</span>
+          </div>
+        </div>
+        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">Read Details [↗]</a>
+      </div>
+      <div class="pf-visual frame" id="featuredVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        ${project.svg}
+        <span class="pf-visual-label">${project.figLabel}</span>
+      </div>
+    `;
+
+    // Re-bind triggers for the new content inside previewArea
+    const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
+    const featuredVisualBtn = document.getElementById('featuredVisualBtn');
+
+    if (featuredDetailsBtn) {
+      featuredDetailsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openProjectModal(index);
+      });
+    }
+    if (featuredVisualBtn) {
+      featuredVisualBtn.addEventListener('click', () => {
+        openProjectModal(index);
+      });
+    }
+
+    // Highlight active card in grid
+    const cards = document.querySelectorAll('.p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
   function renderGrid() {
     const grid = document.getElementById('projectGrid');
     if (!grid) return;
@@ -1082,27 +1152,16 @@
         const index = parseInt(card.getAttribute('data-index'), 10);
         openProjectModal(index);
       });
+      card.addEventListener('mouseenter', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        renderPreviewProject(index);
+      });
     });
   }
 
-  // Bind featured project main triggers
-  const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
-  const featuredVisualBtn = document.getElementById('featuredVisualBtn');
-
-  if (featuredDetailsBtn) {
-    featuredDetailsBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openProjectModal(0);
-    });
-  }
-  if (featuredVisualBtn) {
-    featuredVisualBtn.addEventListener('click', () => {
-      openProjectModal(0);
-    });
-  }
-
-  // Initialize projects list
+  // Initialize projects list and highlight first project
   renderGrid();
+  renderPreviewProject(0);
 
   // custom cursor implementation
   const cursor = document.getElementById('customCursor');
