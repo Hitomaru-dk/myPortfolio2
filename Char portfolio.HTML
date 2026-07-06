@@ -243,20 +243,65 @@
     font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--paper);text-transform:uppercase;opacity:.85;
   }
 
-  .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
+  .project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);}
   .p-card{
     background:var(--graphite);color:var(--paper);
     padding:28px 24px;min-height:190px;
     display:flex;flex-direction:column;justify-content:space-between;
     position:relative;
     transition:background .3s ease;
+    cursor:pointer;
   }
   .p-card:hover{background:var(--graphite-soft);}
+  .p-card.active {
+    background: var(--graphite-soft);
+    box-shadow: inset 0 0 0 2px var(--signal);
+  }
   .p-card .p-tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:#8f8d80;text-transform:uppercase;margin-bottom:auto;}
   .p-card h3{font-family:var(--display);font-size:1.35rem;line-height:1.12;margin:14px 0 8px;}
   .p-card p{font-size:.78rem;color:#a9a79b;max-width:26ch;}
   .p-card .p-stack{font-family:var(--mono);font-size:.64rem;color:#726f61;margin-top:14px;letter-spacing:.04em;}
   .p-card .plus{position:absolute;bottom:16px;right:18px;color:#8f8d80;font-size:.9rem;}
+
+  .pf-next-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .2s ease;
+  }
+  .pf-next-btn:hover {
+    background: var(--signal) !important;
+    color: var(--paper) !important;
+    border-color: var(--signal) !important;
+    transform: translateY(-50%) translateX(2px);
+  }
+  @media (max-width: 1000px) {
+    .pf-next-btn {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      margin-top: 15px;
+      margin-left: auto;
+      width: fit-content;
+    }
+    .pf-next-btn:hover {
+      transform: translateX(2px);
+    }
+  }
 
   /* ===== about + skills ===== */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);}
@@ -498,7 +543,7 @@
       <span class="idx">// 01</span>
     </div>
 
-    <div class="project-feature">
+    <div class="project-feature" id="activeProjectArea">
       <div class="pf-meta">
         <div class="pf-tag">Featured — Project 01</div>
         <h3 class="pf-title">ShowPro</h3>
@@ -535,37 +580,15 @@
           <line x1="200" y1="220" x2="200" y2="280" stroke="#8f8d80" stroke-width="1"/>
         </svg>
         <span class="pf-visual-label">FIG. 01 — SHOWPRO</span>
+        <button class="pf-next-btn" id="nextProjectBtn" aria-label="Next Project">
+          <span>Next Project</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
       </div>
     </div>
 
-    <div class="project-grid">
-      <div class="p-card">
-        <div>
-          <div class="p-tag">Project 02</div>
-          <h3>M-SPEC</h3>
-          <p>E-commerce &amp; dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.</p>
-        </div>
-        <div class="p-stack">JS · NODE · EXPRESS · SQLITE</div>
-        <span class="plus">+</span>
-      </div>
-      <div class="p-card">
-        <div>
-          <div class="p-tag">Project 03</div>
-          <h3>Feane</h3>
-          <p>E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.</p>
-        </div>
-        <div class="p-stack">BOOTSTRAP · JQUERY · EXPRESS</div>
-        <span class="plus">+</span>
-      </div>
-      <div class="p-card">
-        <div>
-          <div class="p-tag">Project 04</div>
-          <h3>RevRoute</h3>
-          <p>Gamified driving-safety app concept with crash detection — pitched Shark-Tank style.</p>
-        </div>
-        <div class="p-stack">PRODUCT · PITCH DECK</div>
-        <span class="plus">+</span>
-      </div>
+    <div class="project-grid" id="projectGrid">
+      <!-- Dynamic Project Cards will be loaded here -->
     </div>
   </div>
 </section>
@@ -714,6 +737,212 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  // Projects data
+  const projectsData = [
+    {
+      tag: "Featured — Project 01",
+      title: "ShowPro",
+      desc: "Student portfolio & co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.",
+      role: "UX Engineer",
+      stack: "React / Vite / TS / Tailwind",
+      link: "https://github.com/PreturnPRO/dii-camt-showprogroup",
+      figLabel: "FIG. 01 — SHOWPRO",
+      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="400" height="300" fill="#0b0b08"/>
+          <g stroke="#3a382f" stroke-width="1">
+            <line x1="0" y1="60" x2="400" y2="60"/>
+            <line x1="0" y1="150" x2="400" y2="150"/>
+            <line x1="0" y1="240" x2="400" y2="240"/>
+            <line x1="100" y1="0" x2="100" y2="300"/>
+            <line x1="300" y1="0" x2="300" y2="300"/>
+          </g>
+          <circle cx="200" cy="150" r="70" fill="none" stroke="#8f8d80" stroke-width="1"/>
+          <circle cx="200" cy="150" r="46" fill="none" stroke="#8f8d80" stroke-width="1"/>
+          <rect x="170" y="120" width="60" height="60" fill="none" stroke="#c1461b" stroke-width="1.4" transform="rotate(45 200 150)"/>
+          <circle cx="200" cy="150" r="3" fill="#c1461b"/>
+          <line x1="200" y1="20" x2="200" y2="80" stroke="#8f8d80" stroke-width="1"/>
+          <line x1="200" y1="220" x2="200" y2="280" stroke="#8f8d80" stroke-width="1"/>
+        </svg>`
+    },
+    {
+      tag: "Project 02",
+      title: "M-SPEC",
+      desc: "E-commerce & dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.",
+      role: "Frontend Developer",
+      stack: "JS · Node · Express · SQLite",
+      link: "#",
+      figLabel: "FIG. 02 — M-SPEC",
+      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="400" height="300" fill="#0b0b08"/>
+          <g stroke="#3a382f" stroke-width="1">
+            <line x1="0" y1="50" x2="400" y2="50"/>
+            <line x1="0" y1="250" x2="400" y2="250"/>
+            <line x1="80" y1="0" x2="80" y2="300"/>
+            <line x1="320" y1="0" x2="320" y2="300"/>
+          </g>
+          <path d="M 120 200 A 90 90 0 0 1 280 200" fill="none" stroke="#8f8d80" stroke-width="1.5" stroke-dasharray="4, 4"/>
+          <path d="M 100 200 A 110 110 0 0 1 300 200" fill="none" stroke="#8f8d80" stroke-width="1"/>
+          <line x1="100" y1="200" x2="90" y2="200" stroke="#8f8d80" stroke-width="2"/>
+          <line x1="300" y1="200" x2="310" y2="200" stroke="#8f8d80" stroke-width="2"/>
+          <line x1="200" y1="90" x2="200" y2="80" stroke="#8f8d80" stroke-width="2"/>
+          <line x1="200" y1="200" x2="260" y2="120" stroke="#c1461b" stroke-width="2"/>
+          <circle cx="200" cy="200" r="10" fill="#0b0b08" stroke="#8f8d80" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="4" fill="#c1461b"/>
+          <path d="M 120 240 Q 150 220 200 240 T 280 240" fill="none" stroke="#3a382f" stroke-width="1"/>
+        </svg>`
+    },
+    {
+      tag: "Project 03",
+      title: "Feane",
+      desc: "E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.",
+      role: "Fullstack Developer",
+      stack: "Bootstrap · jQuery · Express",
+      link: "#",
+      figLabel: "FIG. 03 — FEANE",
+      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="400" height="300" fill="#0b0b08"/>
+          <g stroke="#3a382f" stroke-width="1">
+            <line x1="0" y1="75" x2="400" y2="75"/>
+            <line x1="0" y1="225" x2="400" y2="225"/>
+            <line x1="200" y1="0" x2="200" y2="300"/>
+          </g>
+          <g stroke="#8f8d80" stroke-width="1" fill="none">
+            <polygon points="150,110 200,85 250,110 200,135"/>
+            <polygon points="150,110 150,170 200,195 200,135"/>
+            <polygon points="250,110 250,170 200,195 200,135"/>
+          </g>
+          <g stroke="#c1461b" stroke-width="1.5" fill="none">
+            <polygon points="165,120 200,102 235,120 200,138"/>
+            <line x1="200" y1="138" x2="200" y2="175"/>
+          </g>
+          <circle cx="90" cy="110" r="4" fill="none" stroke="#8f8d80" stroke-width="1"/>
+          <line x1="94" y1="110" x2="150" y2="135" stroke="#3a382f" stroke-dasharray="2,2"/>
+          <circle cx="310" cy="170" r="4" fill="#c1461b"/>
+          <line x1="250" y1="135" x2="306" y2="170" stroke="#3a382f" stroke-dasharray="2,2"/>
+        </svg>`
+    },
+    {
+      tag: "Project 04",
+      title: "RevRoute",
+      desc: "Gamified driving-safety app concept with crash detection — pitched Shark-Tank style.",
+      role: "Product / Pitch",
+      stack: "Product · Pitch Deck",
+      link: "#",
+      figLabel: "FIG. 04 — REVROUTE",
+      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="400" height="300" fill="#0b0b08"/>
+          <g stroke="#3a382f" stroke-width="1">
+            <line x1="0" y1="0" x2="400" y2="300"/>
+            <line x1="400" y1="0" x2="0" y2="300"/>
+            <line x1="200" y1="0" x2="200" y2="300"/>
+            <line x1="0" y1="150" x2="400" y2="150"/>
+          </g>
+          <circle cx="200" cy="150" r="100" fill="none" stroke="#3a382f" stroke-width="1"/>
+          <circle cx="200" cy="150" r="70" fill="none" stroke="#8f8d80" stroke-width="1" stroke-dasharray="6,4"/>
+          <circle cx="200" cy="150" r="40" fill="none" stroke="#8f8d80" stroke-width="1"/>
+          <path d="M 50 150 L 140 150 L 155 110 L 170 190 L 185 80 L 200 210 L 215 130 L 230 165 L 245 150 L 350 150" fill="none" stroke="#c1461b" stroke-width="1.8"/>
+          <circle cx="270" cy="100" r="5" fill="#c1461b"/>
+          <circle cx="270" cy="100" r="12" fill="none" stroke="#c1461b" stroke-width="1" opacity="0.6"/>
+        </svg>`
+    }
+  ];
+
+  let currentProjectIndex = 0;
+
+  function renderProject(index) {
+    currentProjectIndex = index;
+    const project = projectsData[index];
+    const featureArea = document.getElementById('activeProjectArea');
+    if (!featureArea) return;
+
+    featureArea.innerHTML = `
+      <div class="pf-meta">
+        <div class="pf-tag">${project.tag}</div>
+        <h3 class="pf-title">${project.title}</h3>
+        <p class="pf-desc">${project.desc}</p>
+        <div class="pf-facts">
+          <div>
+            <span class="spec-label">Role</span>
+            <span class="spec-value">${project.role}</span>
+          </div>
+          <div>
+            <span class="spec-label">Stack</span>
+            <span class="spec-value">${project.stack}</span>
+          </div>
+        </div>
+        <a class="pf-link" href="${project.link}" target="_blank" rel="noopener">View Repository →</a>
+      </div>
+      <div class="pf-visual frame">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        ${project.svg}
+        <span class="pf-visual-label">${project.figLabel}</span>
+        <button class="pf-next-btn" id="nextProjectBtn" aria-label="Next Project">
+          <span>Next Project</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    `;
+
+    // Re-attach event listener to next project button
+    const nextBtn = document.getElementById('nextProjectBtn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nextIndex = (currentProjectIndex + 1) % projectsData.length;
+        renderProject(nextIndex);
+      });
+    }
+
+    // Update active state in cards grid
+    const cards = document.querySelectorAll('.p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('projectGrid');
+    if (!grid) return;
+    
+    grid.innerHTML = projectsData.map((project, idx) => {
+      return `
+        <div class="p-card" data-index="${idx}">
+          <div>
+            <div class="p-tag">${project.tag}</div>
+            <h3>${project.title}</h3>
+            <p>${project.desc.length > 90 ? project.desc.substring(0, 87) + '...' : project.desc}</p>
+          </div>
+          <div class="p-stack">${project.stack.toUpperCase()}</div>
+          <span class="plus">+</span>
+        </div>
+      `;
+    }).join('');
+
+    // Attach event listeners to cards
+    const cards = grid.querySelectorAll('.p-card');
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        renderProject(index);
+        
+        // Scroll to the active project area smoothly
+        const activeArea = document.getElementById('activeProjectArea');
+        if (activeArea) {
+          activeArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+  }
+
+  // Initialize projects list and active project
+  renderGrid();
+  renderProject(0);
 
   // custom cursor implementation
   const cursor = document.getElementById('customCursor');
