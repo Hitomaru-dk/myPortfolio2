@@ -24,6 +24,23 @@
     --display:'Archivo Black','Inter',sans-serif;
   }
 
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--paper-dim);
+    border-left: 1px solid var(--line);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-soft);
+    border: 2px solid var(--paper-dim);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink);
+  }
+
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -573,19 +590,19 @@
   .custom-cursor svg {
     width: 100%;
     height: 100%;
-    fill: none;
-    animation: rotateHUD 20s linear infinite;
+    fill: currentColor;
+    animation: rotateStar 20s linear infinite;
     transform-origin: center;
     filter: drop-shadow(0 1px 2px rgba(22, 22, 15, 0.15));
   }
-  @keyframes rotateHUD {
+  @keyframes rotateStar {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
   
   .custom-cursor.hover {
-    color: var(--signal);
-    transform: scale(1.6);
+    color: #ff3b30;
+    transform: scale(1.4);
   }
 
   @media (pointer: fine) {
@@ -746,13 +763,8 @@
 
 <!-- ============ CUSTOM CURSOR ============ -->
 <div class="custom-cursor" id="customCursor" aria-hidden="true">
-  <svg viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2, 2"/>
-    <circle cx="16" cy="16" r="2.5" fill="var(--signal)"/>
-    <line x1="16" y1="0" x2="16" y2="6" stroke="currentColor" stroke-width="1"/>
-    <line x1="16" y1="26" x2="16" y2="32" stroke="currentColor" stroke-width="1"/>
-    <line x1="0" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1"/>
-    <line x1="26" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="1"/>
+  <svg viewBox="0 0 24 24">
+    <path d="M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z"/>
   </svg>
 </div>
 
@@ -783,6 +795,7 @@
     <li><a href="#projects"><span class="nav-index">02</span><span data-translate="nav-projects">Projects</span></a></li>
     <li><a href="#about"><span class="nav-index">03</span><span data-translate="nav-about">About</span></a></li>
     <li><a href="#contact"><span class="nav-index">04</span><span data-translate="nav-contact">Contact</span></a></li>
+    <li><a href="#terminal-section"><span class="nav-index">05</span><span data-translate="nav-terminal">Terminal</span></a></li>
   </ul>
 </nav>
 
@@ -916,15 +929,19 @@
           </div>
           <div>
             <div class="spec-label" data-translate="diag-listening">LISTENING</div>
-            <div class="spec-value" data-translate="diag-listening-val">Keshi - Blue</div>
+            <div id="diagListening" class="spec-value">Keshi - Blue</div>
           </div>
           <div>
             <div class="spec-label" data-translate="diag-drink">DRINK</div>
-            <div class="spec-value" data-translate="diag-drink-val">Coffee ☕</div>
+            <div class="spec-value" data-translate="diag-drink-val">Thai Tea Lover 🧋</div>
           </div>
           <div>
             <div class="spec-label" data-translate="diag-cpu">CPU LOAD</div>
-            <div class="spec-value" style="color: var(--signal);" data-translate="diag-cpu-val">100%</div>
+            <div id="diagCPU" class="spec-value" style="color: var(--signal);">Detecting...</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-gpu">GPU LOAD</div>
+            <div id="diagGPU" class="spec-value" style="color: var(--signal);">Detecting...</div>
           </div>
           <div>
             <div class="spec-label" data-translate="diag-mood">MOOD</div>
@@ -1051,7 +1068,7 @@
       <!-- Terminal History/Log -->
       <div id="terminalHistory" style="height: 200px; overflow-y: auto; line-height: 1.5; margin-bottom: 16px; scroll-behavior: smooth;">
         <div>RX-93 HUD OS [Version 2.0.26]</div>
-        <div>Type <span style="color: var(--paper); font-weight: bold;">help</span> to see available commands.</div>
+        <div data-translate="terminal-hint">[ INFO ] Try typing 'help' to unlock commands.</div>
         <div style="margin-bottom: 10px;">------------------------------------</div>
       </div>
       
@@ -1134,6 +1151,7 @@
       "nav-projects": "Projects",
       "nav-about": "About",
       "nav-contact": "Contact",
+      "nav-terminal": "Terminal",
       "hero-eyebrow": "Digital Industry — Frontend / UX",
       "hero-tagline": "Building clean, purposeful frontend experiences — one deliberate interface at a time.",
       "hero-status": "Available for co-op / internship",
@@ -1158,15 +1176,17 @@
       "diag-listening": "LISTENING",
       "diag-listening-val": "Keshi - Blue",
       "diag-drink": "DRINK",
-      "diag-drink-val": "Coffee ☕",
+      "diag-drink-val": "Thai Tea Lover 🧋",
       "diag-cpu": "CPU LOAD",
-      "diag-cpu-val": "100%",
+      "diag-cpu-val": "Detecting...",
+      "diag-gpu": "GPU LOAD",
       "diag-mood": "MOOD",
       "diag-mood-val": "Creating",
       "languages-heading": "LANGUAGES",
       "lang-native": "Native",
       "lang-intermediate": "Intermediate",
       "terminal-heading": "TERMINAL",
+      "terminal-hint": "[ INFO ] Try typing 'help' to unlock commands.",
       "scroll-cue": "Scroll",
       "projects-heading": "PROJECTS",
       "about-heading": "ABOUT",
@@ -1196,6 +1216,7 @@
       "nav-projects": "ผลงาน",
       "nav-about": "เกี่ยวกับฉัน",
       "nav-contact": "ติดต่อ",
+      "nav-terminal": "เทอร์มินัล",
       "hero-eyebrow": "อุตสาหกรรมดิจิทัล — ฟรอนต์เอนด์ / UX",
       "hero-tagline": "สร้างสรรค์ประสบการณ์ฟรอนต์เอนด์ที่สะอาดตาและมีจุดหมาย — ทีละอินเตอร์เฟซอย่างตั้งใจ",
       "hero-status": "พร้อมสำหรับการฝึกงาน / สหกิจศึกษา",
@@ -1220,15 +1241,17 @@
       "diag-listening": "เพลงที่ฟัง",
       "diag-listening-val": "Keshi - Blue",
       "diag-drink": "เครื่องดื่ม",
-      "diag-drink-val": "กาแฟ ☕",
+      "diag-drink-val": "ชาเย็น lover 🧋",
       "diag-cpu": "ภาระงาน CPU",
-      "diag-cpu-val": "100%",
+      "diag-cpu-val": "กำลังประมวลผล...",
+      "diag-gpu": "ภาระงาน GPU",
       "diag-mood": "อารมณ์",
       "diag-mood-val": "กำลังสร้างสรรค์",
       "languages-heading": "ภาษา",
       "lang-native": "ภาษาแม่",
       "lang-intermediate": "ระดับปานกลาง",
       "terminal-heading": "เทอร์มินัล",
+      "terminal-hint": "[ คำแนะนำ ] ลองเขียน help ดูสิ เพื่อเปิดใช้งานคอนโซล",
       "scroll-cue": "เลื่อนลง",
       "projects-heading": "ผลงาน",
       "about-heading": "เกี่ยวกับฉัน",
@@ -1754,6 +1777,67 @@
           scrollToBottom();
         }
       });
+    })();
+
+    // Dynamic Hardware Diagnostics & Media Player Feed
+    (function() {
+      // 1. Get GPU Name via WebGL
+      function getGPUName() {
+        try {
+          const canvas = document.createElement('canvas');
+          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          if (!gl) return 'Generic GPU';
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+          if (!debugInfo) return 'Generic GPU';
+          const rawName = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          // Clean it up slightly for the layout
+          return rawName
+            .replace(/ANGLE \((.*)\)/, '$1')
+            .split(',')[0]
+            .replace('Direct3D11 vs_5_0 ps_5_0', '')
+            .replace('Direct3D11', '')
+            .replace('Laptop GPU', 'Laptop')
+            .trim();
+        } catch (e) {
+          return 'Generic GPU';
+        }
+      }
+
+      const cpuEl = document.getElementById('diagCPU');
+      const gpuEl = document.getElementById('diagGPU');
+      const gpuName = getGPUName();
+      const cores = navigator.hardwareConcurrency || 4;
+
+      if (cpuEl && gpuEl) {
+        function updateLoad() {
+          const cpuPct = Math.floor(Math.random() * 45) + 15; // 15% - 60%
+          const gpuPct = Math.floor(Math.random() * 35) + 10; // 10% - 45%
+          cpuEl.textContent = `${cores} CORES // ${cpuPct}%`;
+          gpuEl.textContent = `${gpuName} // ${gpuPct}%`;
+        }
+        updateLoad();
+        setInterval(updateLoad, 1500);
+      }
+
+      // 2. Mock Spotify Feed rotating every 60 seconds
+      const listeningEl = document.getElementById('diagListening');
+      const songs = [
+        "Keshi - Blue",
+        "LANY - Malibu Nights",
+        "Joji - Die For You",
+        "Flume - Never Be Like You",
+        "Phum Viphurit - Lover Boy",
+        "Keshi - Beside You",
+        "Joji - Glimpse of Us"
+      ];
+      if (listeningEl) {
+        function updateListening() {
+          const randomSong = songs[Math.floor(Math.random() * songs.length)];
+          listeningEl.textContent = `${randomSong} (Local Client)`;
+        }
+        updateListening();
+        setInterval(updateListening, 60000); // 60s
+      }
     })();
   }
 </script>
