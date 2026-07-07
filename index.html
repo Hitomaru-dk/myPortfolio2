@@ -912,6 +912,7 @@
       <div class="about-diagnostics frame" style="padding: clamp(20px, 4vw, 32px); background: var(--paper-dim); border: 1px solid var(--line); margin-bottom: 30px;">
         <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px;">
+          <!-- 1. STATUS -->
           <div>
             <div class="spec-label" data-translate="diag-status">STATUS</div>
             <div class="spec-value" style="display: flex; align-items: center; gap: 8px;">
@@ -919,39 +920,46 @@
               <span data-translate="diag-status-val">ONLINE</span>
             </div>
           </div>
-          <div>
-            <div class="spec-label" data-translate="diag-location">LOCATION</div>
-            <div class="spec-value" data-translate="diag-location-val">Chiang Mai, Thailand</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-currently">CURRENTLY</div>
-            <div class="spec-value" data-translate="diag-currently-val">Building Interactive Experiences</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-listening">LISTENING</div>
-            <div id="diagListening" class="spec-value">Keshi - Blue</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-drink">DRINK</div>
-            <div class="spec-value" data-translate="diag-drink-val">Thai Tea Lover 🧋</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-cpu">CPU LOAD</div>
-            <div id="diagCPU" class="spec-value" style="color: var(--signal);">Detecting...</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-gpu">GPU LOAD</div>
-            <div id="diagGPU" class="spec-value" style="color: var(--signal);">Detecting...</div>
-          </div>
-          <div>
-            <div class="spec-label" data-translate="diag-mood">MOOD</div>
-            <div class="spec-value" data-translate="diag-mood-val">Creating</div>
-          </div>
+          <!-- 2. BORN -->
           <div>
             <div class="spec-label" data-translate="spec-born-lbl">BORN</div>
             <div class="spec-value" data-translate="spec-born-val">4 March</div>
           </div>
-          <div style="grid-column: span 2;">
+          <!-- 3. LOCATION -->
+          <div>
+            <div class="spec-label" data-translate="diag-location">LOCATION</div>
+            <div class="spec-value" data-translate="diag-location-val">Chiang Mai, Thailand</div>
+          </div>
+          <!-- 4. CURRENTLY -->
+          <div>
+            <div class="spec-label" data-translate="diag-currently">CURRENTLY</div>
+            <div class="spec-value" data-translate="diag-currently-val">Building Interactive Experiences</div>
+          </div>
+          <!-- 5. MOOD -->
+          <div>
+            <div class="spec-label" data-translate="diag-mood">MOOD</div>
+            <div class="spec-value" data-translate="diag-mood-val">Creating</div>
+          </div>
+          <!-- 6. DRINK -->
+          <div>
+            <div class="spec-label" data-translate="diag-drink">DRINK</div>
+            <div class="spec-value" data-translate="diag-drink-val">Thai Tea Lover 🧋</div>
+          </div>
+          <!-- 7. LISTENING -->
+          <div>
+            <div class="spec-label" data-translate="diag-listening">LISTENING</div>
+            <div id="diagListening" class="spec-value">Keshi - Blue</div>
+          </div>
+          <!-- 8. CPU // GPU -->
+          <div>
+            <div class="spec-label" data-translate="diag-sys-load">CPU // GPU</div>
+            <div class="spec-value" style="font-size: 0.76rem; line-height: 1.45;">
+              <div>CPU: <span id="diagCPU" style="color: var(--signal); font-weight: 600;">Detecting...</span></div>
+              <div style="margin-top: 4px;">GPU: <span id="diagGPU" style="color: var(--signal); font-weight: 600;">Detecting...</span></div>
+            </div>
+          </div>
+          <!-- 9. LANGUAGES -->
+          <div>
             <div class="spec-label" data-translate="languages-heading">LANGUAGES</div>
             <div class="spec-value" style="font-size: 0.82rem; line-height: 1.4; font-weight: normal;">
               <div>Thai: <span data-translate="lang-native" style="font-weight: 600; color: var(--ink);">Native</span></div>
@@ -1177,9 +1185,7 @@
       "diag-listening-val": "Keshi - Blue",
       "diag-drink": "DRINK",
       "diag-drink-val": "Thai Tea Lover 🧋",
-      "diag-cpu": "CPU LOAD",
-      "diag-cpu-val": "Detecting...",
-      "diag-gpu": "GPU LOAD",
+      "diag-sys-load": "CPU // GPU",
       "diag-mood": "MOOD",
       "diag-mood-val": "Creating",
       "languages-heading": "LANGUAGES",
@@ -1242,9 +1248,7 @@
       "diag-listening-val": "Keshi - Blue",
       "diag-drink": "เครื่องดื่ม",
       "diag-drink-val": "ชาเย็น lover 🧋",
-      "diag-cpu": "ภาระงาน CPU",
-      "diag-cpu-val": "กำลังประมวลผล...",
-      "diag-gpu": "ภาระงาน GPU",
+      "diag-sys-load": "หน่วยประมวลผล (CPU/GPU)",
       "diag-mood": "อารมณ์",
       "diag-mood-val": "กำลังสร้างสรรค์",
       "languages-heading": "ภาษา",
