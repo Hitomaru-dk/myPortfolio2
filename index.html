@@ -739,6 +739,11 @@
     from { opacity: 0.4; }
     to { opacity: 1; }
   }
+  @media (max-width: 768px) {
+    #terminalInput {
+      font-size: 16px !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -911,7 +916,7 @@
       </div>
       <div class="about-diagnostics frame" style="padding: clamp(20px, 4vw, 32px); background: var(--paper-dim); border: 1px solid var(--line); margin-bottom: 30px;">
         <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px;">
           <!-- 1. STATUS -->
           <div>
             <div class="spec-label" data-translate="diag-status">STATUS</div>
@@ -1081,12 +1086,12 @@
       </div>
       
       <!-- Terminal Input Line -->
-      <div style="display: flex; align-items: center;">
-        <span style="margin-right: 8px; color: var(--paper); font-weight: bold;">guest@rx93-hud:~$</span>
+      <form id="terminalForm" style="display: flex; align-items: center; width: 100%; margin: 0; padding: 0;">
+        <span style="margin-right: 8px; color: var(--paper); font-weight: bold; white-space: nowrap;">guest@rx93-hud:~$</span>
         <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" 
                style="flex: 1; background: transparent; border: none; outline: none; color: #00e5ff; font-family: var(--mono); font-size: 0.8rem; padding: 0; margin: 0; box-shadow: none;"
                aria-label="Terminal input">
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -1714,8 +1719,10 @@
         });
       }
       
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+      const form = document.getElementById('terminalForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
           const cmdRaw = input.value;
           const cmd = cmdRaw.trim().toLowerCase();
           input.value = '';
@@ -1779,8 +1786,8 @@
           
           history.appendChild(outputLine);
           scrollToBottom();
-        }
-      });
+        });
+      }
     })();
 
     // Dynamic Hardware Diagnostics & Media Player Feed
