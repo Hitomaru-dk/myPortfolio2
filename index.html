@@ -573,19 +573,19 @@
   .custom-cursor svg {
     width: 100%;
     height: 100%;
-    fill: currentColor;
-    animation: rotateStar 20s linear infinite;
+    fill: none;
+    animation: rotateHUD 20s linear infinite;
     transform-origin: center;
     filter: drop-shadow(0 1px 2px rgba(22, 22, 15, 0.15));
   }
-  @keyframes rotateStar {
+  @keyframes rotateHUD {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
   
   .custom-cursor.hover {
-    color: #ff3b30;
-    transform: scale(1.4);
+    color: var(--signal);
+    transform: scale(1.6);
   }
 
   @media (pointer: fine) {
@@ -609,14 +609,150 @@
   .menu-btn:hover .menu-icon span {
     background-color: #ff3b30 !important;
   }
+
+  /* ===== Loading Screen ===== */
+  #loadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: var(--graphite);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    overflow: hidden;
+    transition: opacity 0.8s cubic-bezier(0.85, 0, 0.15, 1), visibility 0.8s;
+  }
+  
+  #loadingScreen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  #loadingScreen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .loading-content {
+    width: 90%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 20;
+  }
+  
+  .hud-glitch-text {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: 0.05em;
+    color: var(--paper);
+    position: relative;
+  }
+  
+  .loading-sub {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  
+  .loading-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(241, 239, 231, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .loading-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+    transition: width 0.1s linear;
+  }
+  
+  .loading-percentage {
+    align-self: flex-end;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    color: var(--signal);
+  }
+  
+  .loading-console {
+    font-size: 0.62rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    height: 70px;
+    overflow: hidden;
+    border-top: 1px dashed var(--line-soft);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .loading-console div {
+    opacity: 0;
+    transform: translateY(4px);
+    animation: consoleLineIn 0.3s ease forwards;
+  }
+  
+  @keyframes consoleLineIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pulseGlow {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
 </style>
 </head>
 <body>
 
+<!-- ============ LOADING SCREEN ============ -->
+<div id="loadingScreen">
+  <div class="loading-content">
+    <div class="hud-glitch-text" data-text="RX-93 ν GUNDAM">RX-93 ν GUNDAM</div>
+    <div class="loading-sub">SYSTEM INITIALIZATION // READY FOR PILOT</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+    <div class="loading-percentage" id="loadingPercent">0%</div>
+    <div class="loading-console" id="loadingConsole">
+      <div>&gt; LOADING SYSTEM KERNEL... OK</div>
+      <div>&gt; INITIALIZING PSYCHO FRAME... OK</div>
+      <div>&gt; ALIGNING FIN FUNNEL GENERATORS... OK</div>
+      <div>&gt; HUD SYSTEM READY</div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ CUSTOM CURSOR ============ -->
 <div class="custom-cursor" id="customCursor" aria-hidden="true">
-  <svg viewBox="0 0 24 24">
-    <path d="M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z"/>
+  <svg viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2, 2"/>
+    <circle cx="16" cy="16" r="2.5" fill="var(--signal)"/>
+    <line x1="16" y1="0" x2="16" y2="6" stroke="currentColor" stroke-width="1"/>
+    <line x1="16" y1="26" x2="16" y2="32" stroke="currentColor" stroke-width="1"/>
+    <line x1="0" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1"/>
+    <line x1="26" y1="16" x2="32" y2="16" stroke="currentColor" stroke-width="1"/>
   </svg>
 </div>
 
@@ -760,15 +896,46 @@
         <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);" data-translate="about-heading">ABOUT</h2>
         <span class="idx">// 02</span>
       </div>
-      <div class="about-info-box frame" style="margin-bottom: 22px; padding: clamp(16px, 3vw, 24px); background: var(--paper-dim); border: 1px solid var(--line);">
+      <div class="about-diagnostics frame" style="padding: clamp(20px, 4vw, 32px); background: var(--paper-dim); border: 1px solid var(--line); margin-bottom: 30px;">
         <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 32px);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px;">
           <div>
-            <div class="spec-label" data-translate="spec-born-lbl" style="margin-bottom: 6px;">Born</div>
-            <div class="spec-value" data-translate="spec-born-val">4 March</div>
+            <div class="spec-label" data-translate="diag-status">STATUS</div>
+            <div class="spec-value" style="display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-block; width: 8px; height: 8px; background: #00e5ff; border-radius: 50%; box-shadow: 0 0 8px #00e5ff; animation: pulseGlow 1.5s infinite alternate;"></span>
+              <span data-translate="diag-status-val">ONLINE</span>
+            </div>
           </div>
           <div>
-            <div class="spec-label" data-translate="languages-heading" style="margin-bottom: 6px;">Languages</div>
+            <div class="spec-label" data-translate="diag-location">LOCATION</div>
+            <div class="spec-value" data-translate="diag-location-val">Chiang Mai, Thailand</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-currently">CURRENTLY</div>
+            <div class="spec-value" data-translate="diag-currently-val">Building Interactive Experiences</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-listening">LISTENING</div>
+            <div class="spec-value" data-translate="diag-listening-val">Keshi - Blue</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-drink">DRINK</div>
+            <div class="spec-value" data-translate="diag-drink-val">Coffee ☕</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-cpu">CPU LOAD</div>
+            <div class="spec-value" style="color: var(--signal);" data-translate="diag-cpu-val">100%</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="diag-mood">MOOD</div>
+            <div class="spec-value" data-translate="diag-mood-val">Creating</div>
+          </div>
+          <div>
+            <div class="spec-label" data-translate="spec-born-lbl">BORN</div>
+            <div class="spec-value" data-translate="spec-born-val">4 March</div>
+          </div>
+          <div style="grid-column: span 2;">
+            <div class="spec-label" data-translate="languages-heading">LANGUAGES</div>
             <div class="spec-value" style="font-size: 0.82rem; line-height: 1.4; font-weight: normal;">
               <div>Thai: <span data-translate="lang-native" style="font-weight: 600; color: var(--ink);">Native</span></div>
               <div style="margin-top: 4px;">English: <span data-translate="lang-intermediate" style="font-weight: 600; color: var(--ink);">Intermediate</span></div>
@@ -776,8 +943,6 @@
           </div>
         </div>
       </div>
-      <p class="about-statement" data-translate="about-statement">I build interfaces that feel deliberate, not default.</p>
-      <p class="about-sub" data-translate="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
     </div>
 
     <div>
@@ -858,6 +1023,44 @@
           </g>
           <circle cx="80" cy="80" r="4" fill="var(--signal)"/>
         </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MINI TERMINAL ============ -->
+<section id="terminal-section" style="padding-top: 0; padding-bottom: 56px;">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:26px;">
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);" data-translate="terminal-heading">TERMINAL</h2>
+      <span class="idx">// 05</span>
+    </div>
+    
+    <div class="terminal-container frame" style="background: #0b0b08; border: 1px solid var(--line); color: #00e5ff; font-family: var(--mono); padding: clamp(16px, 3vw, 24px); position: relative; font-size: 0.8rem;">
+      <span class="cnr tl" style="border-color: #00e5ff"></span>
+      <span class="cnr tr" style="border-color: #00e5ff"></span>
+      <span class="cnr bl" style="border-color: #00e5ff"></span>
+      <span class="cnr br" style="border-color: #00e5ff"></span>
+      
+      <!-- Terminal Header / Titlebar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(0, 229, 255, 0.3); padding-bottom: 10px; margin-bottom: 16px;">
+        <span style="font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(0, 229, 255, 0.7);">SYSTEM CONSOLE // RX-93-ν</span>
+        <span style="font-size: 0.65rem; color: var(--signal);">ONLINE</span>
+      </div>
+      
+      <!-- Terminal History/Log -->
+      <div id="terminalHistory" style="height: 200px; overflow-y: auto; line-height: 1.5; margin-bottom: 16px; scroll-behavior: smooth;">
+        <div>RX-93 HUD OS [Version 2.0.26]</div>
+        <div>Type <span style="color: var(--paper); font-weight: bold;">help</span> to see available commands.</div>
+        <div style="margin-bottom: 10px;">------------------------------------</div>
+      </div>
+      
+      <!-- Terminal Input Line -->
+      <div style="display: flex; align-items: center;">
+        <span style="margin-right: 8px; color: var(--paper); font-weight: bold;">guest@rx93-hud:~$</span>
+        <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" 
+               style="flex: 1; background: transparent; border: none; outline: none; color: #00e5ff; font-family: var(--mono); font-size: 0.8rem; padding: 0; margin: 0; box-shadow: none;"
+               aria-label="Terminal input">
       </div>
     </div>
   </div>
@@ -946,6 +1149,24 @@
       "spec-edu-val": "CAMT, Chiang Mai University",
       "spec-born-lbl": "Born",
       "spec-born-val": "4 March",
+      "diag-status": "STATUS",
+      "diag-status-val": "ONLINE",
+      "diag-location": "LOCATION",
+      "diag-location-val": "Chiang Mai, Thailand",
+      "diag-currently": "CURRENTLY",
+      "diag-currently-val": "Building Interactive Experiences",
+      "diag-listening": "LISTENING",
+      "diag-listening-val": "Keshi - Blue",
+      "diag-drink": "DRINK",
+      "diag-drink-val": "Coffee ☕",
+      "diag-cpu": "CPU LOAD",
+      "diag-cpu-val": "100%",
+      "diag-mood": "MOOD",
+      "diag-mood-val": "Creating",
+      "languages-heading": "LANGUAGES",
+      "lang-native": "Native",
+      "lang-intermediate": "Intermediate",
+      "terminal-heading": "TERMINAL",
       "scroll-cue": "Scroll",
       "projects-heading": "PROJECTS",
       "about-heading": "ABOUT",
@@ -990,6 +1211,24 @@
       "spec-edu-val": "CAMT, มหาวิทยาลัยเชียงใหม่",
       "spec-born-lbl": "วันเกิด",
       "spec-born-val": "4 มีนาคม",
+      "diag-status": "สถานะ",
+      "diag-status-val": "ออนไลน์",
+      "diag-location": "ที่อยู่",
+      "diag-location-val": "เชียงใหม่, ประเทศไทย",
+      "diag-currently": "กำลังทำ",
+      "diag-currently-val": "พัฒนาเว็บที่มีปฏิสัมพันธ์สูง",
+      "diag-listening": "เพลงที่ฟัง",
+      "diag-listening-val": "Keshi - Blue",
+      "diag-drink": "เครื่องดื่ม",
+      "diag-drink-val": "กาแฟ ☕",
+      "diag-cpu": "ภาระงาน CPU",
+      "diag-cpu-val": "100%",
+      "diag-mood": "อารมณ์",
+      "diag-mood-val": "กำลังสร้างสรรค์",
+      "languages-heading": "ภาษา",
+      "lang-native": "ภาษาแม่",
+      "lang-intermediate": "ระดับปานกลาง",
+      "terminal-heading": "เทอร์มินัล",
       "scroll-cue": "เลื่อนลง",
       "projects-heading": "ผลงาน",
       "about-heading": "เกี่ยวกับฉัน",
@@ -1408,7 +1647,115 @@
       document.addEventListener('mouseenter', () => {
         if (hasMoved) cursor.style.opacity = '1';
       });
-    }
+    // Loading Screen Simulation
+    (function() {
+      const loadingScreen = document.getElementById('loadingScreen');
+      const loadingBar = document.getElementById('loadingBar');
+      const loadingPercent = document.getElementById('loadingPercent');
+      if (loadingScreen && loadingBar && loadingPercent) {
+        let progress = 0;
+        const loadInterval = setInterval(() => {
+          progress += Math.floor(Math.random() * 6) + 4;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(loadInterval);
+            setTimeout(() => {
+              loadingScreen.classList.add('fade-out');
+            }, 600);
+          }
+          loadingBar.style.width = progress + '%';
+          loadingPercent.textContent = progress + '%';
+        }, 60);
+      }
+    })();
+
+    // Terminal CLI implementation
+    (function() {
+      const input = document.getElementById('terminalInput');
+      const history = document.getElementById('terminalHistory');
+      
+      if (!input || !history) return;
+      
+      function scrollToBottom() {
+        history.scrollTop = history.scrollHeight;
+      }
+      
+      const container = document.querySelector('.terminal-container');
+      if (container) {
+        container.addEventListener('click', () => {
+          input.focus();
+        });
+      }
+      
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmdRaw = input.value;
+          const cmd = cmdRaw.trim().toLowerCase();
+          input.value = '';
+          
+          const cmdLine = document.createElement('div');
+          cmdLine.innerHTML = `<span style="color: var(--paper); font-weight: bold;">guest@rx93-hud:~$</span> ${cmdRaw}`;
+          history.appendChild(cmdLine);
+          
+          const outputLine = document.createElement('div');
+          outputLine.style.marginTop = '4px';
+          outputLine.style.marginBottom = '12px';
+          
+          if (cmd === '') {
+            history.appendChild(outputLine);
+            scrollToBottom();
+            return;
+          }
+          
+          switch (cmd) {
+            case 'help':
+              outputLine.innerHTML = `
+                Available commands:<br>
+                &nbsp;&nbsp;<span style="color: var(--paper);">whoami</span>&nbsp;&nbsp;&nbsp;&nbsp;: Print user profile identity<br>
+                &nbsp;&nbsp;<span style="color: var(--paper);">about</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Output developer diagnostic info<br>
+                &nbsp;&nbsp;<span style="color: var(--paper);">projects</span>&nbsp;&nbsp;: Output summaries of key projects<br>
+                &nbsp;&nbsp;<span style="color: var(--paper);">contact</span>&nbsp;&nbsp;&nbsp;: Output contact information<br>
+                &nbsp;&nbsp;<span style="color: var(--paper);">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Clear the console window
+              `;
+              break;
+            case 'whoami':
+              outputLine.innerHTML = `Creative Developer // CAMT Student // Frontend Engineer`;
+              break;
+            case 'about':
+              outputLine.innerHTML = `
+                Name: Pangpond (Nattakorn Tanngam)<br>
+                Role: Frontend Developer & IT Support<br>
+                Focus: React, TypeScript, UI/UX Design<br>
+                Status: Seeking co-op / internship placement
+              `;
+              break;
+            case 'projects':
+              outputLine.innerHTML = `
+                - ShowPro: Student portfolio and co-op portal<br>
+                - myPortfolio V1: Cyberpunk-style portfolio layout<br>
+                - MC-Status: Minecraft server monitoring dashboard
+              `;
+              break;
+            case 'contact':
+              outputLine.innerHTML = `
+                Email : nattakorn_tanngam@cmu.ac.th<br>
+                GitHub: github.com/Hitomaru-dk
+              `;
+              break;
+            case 'clear':
+              history.innerHTML = '';
+              scrollToBottom();
+              return;
+            default:
+              outputLine.innerHTML = `<span style="color: var(--signal);">Error: Command '${cmdRaw}' not recognized.</span> Type 'help' for options.`;
+          }
+          
+          history.appendChild(outputLine);
+          scrollToBottom();
+        }
+      });
+    })();
+  }
 </script>
 </body>
 </html>
