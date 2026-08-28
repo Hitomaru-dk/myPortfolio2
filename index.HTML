@@ -6,7 +6,7 @@
 <title>Nattakorn — Frontend Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Kanit:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f1efe7;
@@ -19,9 +19,9 @@
     --graphite:#0b0b08;
     --graphite-soft:#1c1c17;
     --signal:#c1461b;
-    --mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
-    --sans:'Inter',system-ui,-apple-system,sans-serif;
-    --display:'Archivo Black','Inter',sans-serif;
+    --mono:'JetBrains Mono','IBM Plex Sans Thai',ui-monospace,'SF Mono',monospace;
+    --sans:'Inter','IBM Plex Sans Thai',system-ui,-apple-system,sans-serif;
+    --display:'Archivo Black','Kanit','Inter',sans-serif;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -82,9 +82,121 @@
     display:flex;align-items:center;justify-content:space-between;
     padding:18px clamp(20px,4vw,56px);
   }
+  .logo-wrap{
+    display:flex;
+    align-items:center;
+    gap:clamp(16px, 2.5vw, 28px);
+  }
   .logo{display:flex;flex-direction:column;gap:1px;}
   .logo-mark{font-family:var(--display);font-size:1.15rem;letter-spacing:.02em;}
   .logo-sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;}
+  .boxing-nu-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .boxing-nu-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    animation: nuBounce 0.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite alternate;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .boxing-nu-icon:hover {
+    transform: scale(1.2) rotate(8deg);
+  }
+  @keyframes nuBounce {
+    0% {
+      transform: translateY(0) scale(1, 1);
+    }
+    100% {
+      transform: translateY(-8px) scale(1.08, 0.95);
+    }
+  }
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:clamp(12px, 2vw, 22px);
+  }
+  .lang-switch{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.1em;
+    padding:6px 0;
+  }
+  .lang-btn{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.1em;
+    font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    padding:2px 2px;
+    background:none;
+    border:none;
+    border-bottom:2px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+    min-width:24px;
+    text-align:center;
+    display:inline-block;
+  }
+  .lang-btn:hover{
+    color:var(--signal) !important;
+  }
+  .lang-btn.active{
+    color:var(--ink);
+    border-bottom:2px solid var(--ink);
+  }
+  .lang-divider{
+    color:var(--line);
+    font-size:.78rem;
+    user-select:none;
+    margin:0 2px;
+  }
+
+  .nav-lang-switch{
+    position:absolute;
+    top:28px;
+    right:clamp(20px,4vw,56px);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:.85rem;
+    letter-spacing:.1em;
+    padding:6px 14px;
+    border:1px solid rgba(241,239,231,0.2);
+    background:rgba(255,255,255,0.05);
+    color:var(--paper);
+  }
+  .nav-lang-btn{
+    font-family:var(--mono);
+    font-size:.85rem;
+    letter-spacing:.1em;
+    font-weight:500;
+    color:rgba(241,239,231,0.5);
+    cursor:pointer;
+    background:none;
+    border:none;
+    border-bottom:2px solid transparent;
+    padding:2px 4px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .nav-lang-btn:hover{
+    color:var(--signal) !important;
+  }
+  .nav-lang-btn.active{
+    color:var(--paper);
+    font-weight:700;
+    border-bottom:2px solid var(--paper);
+  }
+
   .menu-btn{
     display:flex;align-items:center;gap:10px;
     font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
@@ -179,12 +291,23 @@
     position:relative;
     display:flex;align-items:center;justify-content:center;
     text-align:center;
+    overflow:hidden;
+  }
+  .hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .3s ease;
+  }
+  .hero-photo:hover img{
+    transform:scale(1.03);
   }
   .hero-photo p{
     font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--ink-soft);
     text-transform:uppercase;padding:0 20px;
   }
-  .hero-photo .plus{position:absolute;font-size:1rem;color:var(--ink-soft);opacity:.5;}
+  .hero-photo .plus{position:absolute;font-size:1rem;color:var(--ink-soft);opacity:.5;z-index:3;}
   .hero-photo .plus.p1{top:14px;left:14px;}
   .hero-photo .plus.p2{bottom:14px;right:14px;}
 
@@ -214,25 +337,26 @@
   .sec-head .idx{font-family:var(--mono);font-size:.95rem;color:var(--ink-soft);}
   section{padding:clamp(64px,10vw,120px) 0;}
 
-  /* ===== projects ===== */
+  /* ===== projects & features ===== */
   .project-feature{
     display:grid;
     grid-template-columns:.85fr 1.15fr;
     gap:44px;
-    margin-bottom:22px;
-    min-height:330px;
-    align-items:center;
+    margin-bottom:clamp(32px, 4vw, 48px);
+    min-height:340px;
+    align-items:stretch;
   }
   .pf-meta{
     padding:6px 6px 6px 0;
     display:flex;
     flex-direction:column;
-    height:330px;
+    min-height:340px;
+    height:100%;
   }
-  .pf-tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;}
-  .pf-title{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.08;margin-bottom:16px;}
-  .pf-desc{color:var(--ink-soft);font-size:.94rem;max-width:340px;margin-bottom:26px;}
-  .pf-facts{display:flex;gap:36px;margin-top:auto;margin-bottom:26px;}
+  .pf-tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:12px;}
+  .pf-title{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.08;margin-bottom:14px;}
+  .pf-desc{color:var(--ink-soft);font-size:.92rem;line-height:1.55;max-width:440px;margin-bottom:18px;}
+  .pf-facts{display:flex;gap:36px;margin-top:auto;margin-bottom:20px;}
   .pf-facts div span{display:block;}
   .pf-facts .spec-label{margin-bottom:6px;}
   .pf-facts .spec-value{font-weight:500;font-size:.76rem;}
@@ -246,7 +370,8 @@
   .pf-visual{
     background:#0b0b08;
     position:relative;
-    height:330px;
+    min-height:340px;
+    height:100%;
     overflow:hidden;
     display:flex;
     align-items:center;
@@ -269,6 +394,31 @@
     font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--paper);text-transform:uppercase;opacity:.9;
     background:rgba(11,11,8,0.85);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);
     backdrop-filter:blur(4px);
+  }
+
+  /* ===== SELF-DEVELOPMENT 1:1 Frame Style ===== */
+  #self-development .pf-visual {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: unset;
+    width: 100%;
+    max-width: 440px;
+    margin-left: auto;
+  }
+  #selfDevModal .modal-content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  #selfDevModal .pf-visual {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: unset;
+    width: 100%;
+    max-height: 480px;
+    margin: 0 auto;
+  }
+  #self-development .pf-visual img,
+  #selfDevModal .pf-visual img {
+    object-fit: cover;
   }
 
   .project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
@@ -377,8 +527,8 @@
   }
   .about-photo svg{width:52%;opacity:.55;}
   .about-cap{font-family:var(--mono);font-size:.64rem;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;}
-  .about-statement{font-family:var(--display);font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.22;margin:22px 0 18px;max-width:20ch;}
-  .about-sub{color:var(--ink-soft);font-size:.9rem;max-width:38ch;margin-bottom:22px;}
+  .about-statement{font-family:var(--display);font-size:clamp(1.2rem,2.2vw,1.65rem);line-height:1.3;margin:0 0 18px;max-width:100%;}
+  .about-sub{color:var(--ink-soft);font-size:.95rem;line-height:1.65;max-width:100%;margin-bottom:22px;}
 
   .skill-list{display:flex;flex-direction:column;}
   .skill-list li{
@@ -576,6 +726,7 @@
     .project-feature{grid-template-columns:1fr; min-height: auto;}
     .pf-meta {height: auto; min-height: auto; padding: 10px 0;}
     .pf-visual {height: 240px;}
+    #self-development .pf-visual {height: auto; max-width: 320px; margin: 0 auto;}
     .project-grid{grid-template-columns:1fr;}
     .split{grid-template-columns:1fr;}
     .contact-grid{grid-template-columns:1fr;gap:36px;}
@@ -750,41 +901,6 @@
     }
   }
 
-  .custom-cursor svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-    animation: rotateStar 20s linear infinite;
-    transform-origin: center;
-    filter: drop-shadow(0 1px 2px rgba(22, 22, 15, 0.15));
-  }
-  @keyframes rotateStar {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  
-  .custom-cursor.hover {
-    color: #ff3b30;
-    transform: scale(1.4);
-  }
-
-  @media (pointer: fine) {
-    html.custom-cursor-enabled,
-    html.custom-cursor-enabled body,
-    html.custom-cursor-enabled a,
-    html.custom-cursor-enabled button,
-    html.custom-cursor-enabled select,
-    html.custom-cursor-enabled input,
-    html.custom-cursor-enabled textarea,
-    html.custom-cursor-enabled [role="button"],
-    html.custom-cursor-enabled .menu-btn {
-      cursor: none !important;
-    }
-    html.custom-cursor-enabled .custom-cursor {
-      display: block;
-    }
-  }
-
   /* Clickable elements red hover style */
   a:hover, button:hover, .pf-link:hover, .back-top:hover {
     color: #ff3b30 !important;
@@ -798,43 +914,52 @@
   }
 </style>
 </head>
-<body>
-
-<!-- ============ CUSTOM CURSOR ============ -->
-<div class="custom-cursor" id="customCursor" aria-hidden="true">
-  <svg viewBox="0 0 24 24">
-    <path d="M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z"/>
-  </svg>
-</div>
+<body id="top">
 
 <!-- ============ HEADER ============ -->
 <header>
   <div class="header-inner">
-    <div class="logo">
-      <span class="logo-mark">NATTAKORN</span>
-      <span class="logo-sub">Frontend Dev · v2.0</span>
+    <div class="logo-wrap">
+      <div class="logo">
+        <span class="logo-mark" data-i18n="logoMark">NATTAKORN</span>
+        <span class="logo-sub">Frontend Dev · v2.0</span>
+      </div>
+      <div class="boxing-nu-badge">
+        <img src="assets/pfp/boxing-nu.gif" class="boxing-nu-icon" alt="boxing-nu">
+      </div>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-      <span>MENU</span>
-      <span class="menu-icon"><span></span><span></span><span></span></span>
-    </button>
+    <div class="header-right">
+      <div class="lang-switch" role="group" aria-label="Language Switcher">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-divider">/</span>
+        <button type="button" class="lang-btn" data-lang="th">TH</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span>MENU</span>
+        <span class="menu-icon"><span></span><span></span><span></span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+  <div class="nav-lang-switch" role="group" aria-label="Language Switcher">
+    <button type="button" class="nav-lang-btn active" data-lang="en">EN</button>
+    <span class="lang-divider">/</span>
+    <button type="button" class="nav-lang-btn" data-lang="th">TH</button>
+  </div>
   <ul>
-    <li><a href="#top"><span class="nav-index">01</span>Home</a></li>
-    <li><a href="#projects"><span class="nav-index">02</span>Projects</a></li>
-    <li><a href="#certificates"><span class="nav-index">03</span>Certificates</a></li>
-    <li><a href="#about"><span class="nav-index">04</span>About</a></li>
-    <li><a href="#self-development"><span class="nav-index">05</span>Self-Development</a></li>
-    <li><a href="#contact"><span class="nav-index">06</span>Contact</a></li>
-    <li><a href="#terminal-section"><span class="nav-index">07</span>Terminal</a></li>
+    <li><a href="#top"><span class="nav-index">01</span><span data-i18n="navHome">Home</span></a></li>
+    <li><a href="#projects"><span class="nav-index">02</span><span data-i18n="navProjects">Projects</span></a></li>
+    <li><a href="#certificates"><span class="nav-index">03</span><span data-i18n="navCerts">Certificates</span></a></li>
+    <li><a href="#about"><span class="nav-index">04</span><span data-i18n="navAbout">About</span></a></li>
+    <li><a href="#self-development"><span class="nav-index">05</span><span data-i18n="navSelfDev">Self-Development</span></a></li>
+    <li><a href="#contact"><span class="nav-index">06</span><span data-i18n="navContact">Contact</span></a></li>
+    <li><a href="#terminal-section"><span class="nav-index">07</span><span data-i18n="navTerminal">Terminal</span></a></li>
   </ul>
 </nav>
 
 <!-- ============ HERO ============ -->
-<div id="top"></div>
 <section class="hero wrap">
   <div class="ghost-type" aria-hidden="true">
     <div>DEVELOPER</div>
@@ -845,47 +970,47 @@
 
   <div class="hero-grid">
     <div class="hero-left">
-      <div class="eyebrow" style="margin-bottom:14px;">Digital Industry — Frontend / UX</div>
+      <div class="eyebrow" style="margin-bottom:14px;" data-i18n="heroEyebrow">Digital Industry — Frontend / UX</div>
       <div class="hero-tags">
         <span class="tag">[ REACT ]</span>
         <span class="tag">[ TYPESCRIPT ]</span>
         <span class="tag">[ TAILWIND ]</span>
         <span class="tag">[ UI/UX ]</span>
       </div>
-      <h1 class="hero-title">NATTAKORN</h1>
-      <p class="hero-tagline">Building clean, purposeful frontend experiences — one deliberate interface at a time.</p>
+      <h1 class="hero-title" data-i18n="heroTitle">NATTAKORN</h1>
+      <p class="hero-tagline" data-i18n="heroTagline">Building clean, purposeful frontend experiences — one deliberate interface at a time.</p>
       <div class="status-row">
         <span class="status-dot"></span>
-        <span class="status-text">Available for co-op / internship</span>
+        <span class="status-text" data-i18n="heroStatus">Available for co-op / internship</span>
       </div>
     </div>
 
     <div class="hero-photo frame">
       <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
       <span class="plus p1">+</span><span class="plus p2">+</span>
-      <p>[ Portrait ]<br>Add your photo here</p>
+      <img src="assets/pfp/IMG_2079.jpg" alt="Nattakorn Tanngam">
     </div>
 
     <div class="spec-rail">
       <div class="spec-row" style="--i:1">
-        <div class="spec-label">Unit</div>
-        <div class="spec-value">NATTAKORN</div>
+        <div class="spec-label" data-i18n="specUnit">Unit</div>
+        <div class="spec-value" data-i18n="specUnitVal">NATTAKORN</div>
       </div>
       <div class="spec-row" style="--i:2">
-        <div class="spec-label">Role</div>
-        <div class="spec-value">Frontend Developer</div>
+        <div class="spec-label" data-i18n="specRole">Role</div>
+        <div class="spec-value" data-i18n="specRoleVal">Frontend Developer</div>
       </div>
       <div class="spec-row" style="--i:3">
-        <div class="spec-label">Focus</div>
+        <div class="spec-label" data-i18n="specFocus">Focus</div>
         <div class="spec-value small">React · UI/UX · Web Apps</div>
       </div>
       <div class="spec-row" style="--i:4">
-        <div class="spec-label">Based</div>
-        <div class="spec-value">Thailand</div>
+        <div class="spec-label" data-i18n="specBased">Based</div>
+        <div class="spec-value" data-i18n="specBasedVal">Thailand</div>
       </div>
       <div class="spec-row" style="--i:5">
-        <div class="spec-label">Education</div>
-        <div class="spec-value small">CAMT, Chiang Mai University</div>
+        <div class="spec-label" data-i18n="specEdu">Education</div>
+        <div class="spec-value small" data-i18n="specEduVal">CAMT, Chiang Mai University</div>
       </div>
     </div>
   </div>
@@ -941,20 +1066,8 @@
           <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">ABOUT</h2>
           <span class="idx">// 04</span>
         </div>
-        <div class="about-photo frame">
-          <span class="cnr tl"></span><span class="cnr br"></span>
-          <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g fill="none" stroke="var(--ink)" stroke-width="1">
-              <rect x="30" y="20" width="140" height="120"/>
-              <line x1="30" y1="20" x2="170" y2="140"/>
-              <line x1="170" y1="20" x2="30" y2="140"/>
-              <circle cx="100" cy="80" r="34"/>
-            </g>
-          </svg>
-        </div>
-        <div class="about-cap">Frontend / UX — 2026</div>
-        <p class="about-statement">I build interfaces that feel deliberate, not default.</p>
-        <p class="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
+        <p class="about-statement" data-i18n="aboutStatement">Started with zero coding background. Now I ship full-stack apps end to end.</p>
+        <p class="about-sub" data-i18n="aboutSub">Frontend/full-stack developer at CAMT · DII, Chiang Mai University — React, TypeScript, Express, PostgreSQL. Worked as a UX Engineer on a team project, currently seeking a co-op placement.</p>
       </div>
 
       <div>
@@ -1183,113 +1296,181 @@
   tick();
   setInterval(tick, 1000);
 
+  // ==================== I18N SYSTEM ====================
+  let currentLang = localStorage.getItem('port_lang') || 'en';
+
+  function getText(val) {
+    if (!val) return '';
+    if (typeof val === 'object') {
+      return val[currentLang] || val.en || val.th || '';
+    }
+    return val;
+  }
+
+  const i18n = {
+    en: {
+      logoMark: "NATTAKORN",
+      heroTitle: "NATTAKORN",
+      specUnitVal: "NATTAKORN",
+      navHome: "Home",
+      navProjects: "Projects",
+      navCerts: "Certificates",
+      navAbout: "About",
+      navSelfDev: "Self-Development",
+      navContact: "Contact",
+      navTerminal: "Terminal",
+      heroEyebrow: "Digital Industry — Frontend / UX",
+      heroTagline: "Building clean, purposeful frontend experiences — one deliberate interface at a time.",
+      heroStatus: "Available for co-op / internship",
+      specUnit: "Unit",
+      specRole: "Role",
+      specRoleVal: "Frontend Developer",
+      specFocus: "Focus",
+      specFocusVal: "React · UI/UX · Web Apps",
+      specBased: "Based",
+      specBasedVal: "Thailand",
+      specEdu: "Education",
+      specEduVal: "CAMT, Chiang Mai University",
+      aboutStatement: "Started with zero coding background. Now I ship full-stack apps end to end.",
+      aboutSub: "Frontend/full-stack developer at CAMT · DII, Chiang Mai University — React, TypeScript, Express, PostgreSQL. Worked as a UX Engineer on a team project, currently seeking a co-op placement.",
+      readDetails: "Read Details [↗]",
+      viewRepo: "View Repository →",
+      viewCert: "View Certificate [↗]",
+      openHighRes: "Open High-Res [↗]",
+      viewFullPhoto: "View Full Photo [↗]",
+      viewMore: "VIEWMORE",
+      roleLabel: "Role",
+      stackLabel: "Stack",
+      focusLabel: "Focus",
+      issuerLabel: "Issuer",
+      statusLabel: "Status",
+      statusVerified: "VERIFIED [✓]"
+    },
+    th: {
+      logoMark: "ณัฐกรณ์",
+      heroTitle: "ณัฐกรณ์",
+      specUnitVal: "ณัฐกรณ์",
+      navHome: "หน้าแรก",
+      navProjects: "โปรเจกต์",
+      navCerts: "เกียรติบัตร",
+      navAbout: "เกี่ยวกับ",
+      navSelfDev: "ผลงาน & กิจกรรม",
+      navContact: "ติดต่อ",
+      navTerminal: "เทอร์มินัล",
+      heroEyebrow: "อุตสาหกรรมดิจิทัล — Frontend / UX",
+      heroTagline: "สร้างสรรค์ประสบการณ์ Frontend ที่ประณีต เรียบง่าย และตอบโจทย์ทุกการใช้งาน",
+      heroStatus: "พร้อมสำหรับการฝึกงาน / สหกิจศึกษา (Co-op)",
+      specUnit: "ชื่อ",
+      specRole: "ตำแหน่ง",
+      specRoleVal: "Frontend Developer",
+      specFocus: "ความถนัด",
+      specFocusVal: "React · UI/UX · Web Apps",
+      specBased: "ที่อยู่",
+      specBasedVal: "ประเทศไทย",
+      specEdu: "การศึกษา",
+      specEduVal: "CAMT, มหาวิทยาลัยเชียงใหม่",
+      aboutStatement: "เริ่มต้นจากศูนย์ด้านการเขียนโค้ด สู่การสร้างและส่งมอบ Full-Stack Application แบบครบวงจร",
+      aboutSub: "นักพัฒนา Frontend / Full-stack จาก CAMT · DII มหาวิทยาลัยเชียงใหม่ (React, TypeScript, Express, PostgreSQL) ผ่านประสบการณ์ตำแหน่ง UX Engineer ในโปรเจกต์ทีม กำลังเปิดรับโอกาสฝึกงานสหกิจศึกษา",
+      readDetails: "ดูรายละเอียด [↗]",
+      viewRepo: "ดูซอร์สโค้ด GitHub →",
+      viewCert: "ดูเกียรติบัตร [↗]",
+      openHighRes: "เปิดภาพความละเอียดสูง [↗]",
+      viewFullPhoto: "ดูภาพขนาดเต็ม [↗]",
+      viewMore: "ดูรูปเพิ่มเติม",
+      roleLabel: "ตำแหน่ง",
+      stackLabel: "เทคโนโลยี",
+      focusLabel: "ทักษะเด่น",
+      issuerLabel: "ผู้ออกให้",
+      statusLabel: "สถานะ",
+      statusVerified: "ตรวจสอบแล้ว [✓]"
+    }
+  };
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('port_lang', lang);
+
+    document.querySelectorAll('.lang-btn, .nav-lang-btn').forEach(btn => {
+      if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[lang] && i18n[lang][key]) {
+        el.textContent = i18n[lang][key];
+      }
+    });
+
+    renderProjectGrid();
+    renderPreviewProject(currentProjectIndex);
+    renderCertGrid();
+    renderPreviewCert(currentCertIndex, certPreviewImgIndex);
+    renderSelfDevGrid();
+    renderPreviewSelfDev(currentSelfDevIndex);
+  }
+
+  document.querySelectorAll('.lang-btn, .nav-lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lang = btn.getAttribute('data-lang');
+      if (lang) setLanguage(lang);
+    });
+  });
+
   // ==================== 02 PROJECTS ====================
   const projectsData = [
     {
-      tag: "Featured — Project 01",
+      tag: { en: "Featured — Project 01", th: "ผลงานเด่น — โปรเจกต์ 01" },
       title: "ShowPro",
-      desc: "Student portfolio & co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.",
-      role: "UX Engineer",
+      desc: {
+        en: "Student portfolio & co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.",
+        th: "ระบบจัดการแฟ้มสะสมผลงานและสหกิจศึกษาของนักศึกษา CAMT / DII พัฒนาระบบ Frontend ทั้งหมด รองรับ Dark Mode และการสลับสองภาษา TH/EN"
+      },
+      role: { en: "UX Engineer", th: "UX Engineer" },
       stack: "React / Vite / TS / Tailwind",
       link: "https://github.com/PreturnPRO/dii-camt-showprogroup",
       figLabel: "FIG. 01 — SHOWPRO",
-      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="400" height="300" fill="#0b0b08"/>
-          <g stroke="#3a382f" stroke-width="1">
-            <line x1="0" y1="60" x2="400" y2="60"/>
-            <line x1="0" y1="150" x2="400" y2="150"/>
-            <line x1="0" y1="240" x2="400" y2="240"/>
-            <line x1="100" y1="0" x2="100" y2="300"/>
-            <line x1="300" y1="0" x2="300" y2="300"/>
-          </g>
-          <circle cx="200" cy="150" r="70" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <circle cx="200" cy="150" r="46" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <rect x="170" y="120" width="60" height="60" fill="none" stroke="#c1461b" stroke-width="1.4" transform="rotate(45 200 150)"/>
-          <circle cx="200" cy="150" r="3" fill="#c1461b"/>
-          <line x1="200" y1="20" x2="200" y2="80" stroke="#8f8d80" stroke-width="1"/>
-          <line x1="200" y1="220" x2="200" y2="280" stroke="#8f8d80" stroke-width="1"/>
-        </svg>`
+      visualHtml: `<img src="assets/PROJECTS/DII.png" alt="ShowPro">`
     },
     {
-      tag: "Project 02",
+      tag: { en: "Project 02", th: "โปรเจกต์ 02" },
       title: "M-SPEC",
-      desc: "E-commerce & dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.",
-      role: "Frontend Developer",
+      desc: {
+        en: "E-commerce & dyno-tuning booking site for a local shop. Booking modal, auto-scrolling parts ticker, cancel / rebook flow.",
+        th: "เว็บไซต์อีคอมเมิร์ซและระบบจองคิวจูนรถ Dyno-tuning ระบบจองคิวออนไลน์ แถบแสดงอะไหล่ และฟังก์ชันจัดการนัดหมาย"
+      },
+      role: { en: "Frontend Developer", th: "Frontend Developer" },
       stack: "JS · Node · Express · SQLite",
       link: "#",
       figLabel: "FIG. 02 — M-SPEC",
-      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="400" height="300" fill="#0b0b08"/>
-          <g stroke="#3a382f" stroke-width="1">
-            <line x1="0" y1="50" x2="400" y2="50"/>
-            <line x1="0" y1="250" x2="400" y2="250"/>
-            <line x1="80" y1="0" x2="80" y2="300"/>
-            <line x1="320" y1="0" x2="320" y2="300"/>
-          </g>
-          <path d="M 120 200 A 90 90 0 0 1 280 200" fill="none" stroke="#8f8d80" stroke-width="1.5" stroke-dasharray="4, 4"/>
-          <path d="M 100 200 A 110 110 0 0 1 300 200" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <line x1="100" y1="200" x2="90" y2="200" stroke="#8f8d80" stroke-width="2"/>
-          <line x1="300" y1="200" x2="310" y2="200" stroke="#8f8d80" stroke-width="2"/>
-          <line x1="200" y1="90" x2="200" y2="80" stroke="#8f8d80" stroke-width="2"/>
-          <line x1="200" y1="200" x2="260" y2="120" stroke="#c1461b" stroke-width="2"/>
-          <circle cx="200" cy="200" r="10" fill="#0b0b08" stroke="#8f8d80" stroke-width="1.5"/>
-          <circle cx="200" cy="200" r="4" fill="#c1461b"/>
-          <path d="M 120 240 Q 150 220 200 240 T 280 240" fill="none" stroke="#3a382f" stroke-width="1"/>
-        </svg>`
+      visualHtml: `<img src="assets/PROJECTS/Msp.png" alt="M-SPEC">`
     },
     {
-      tag: "Project 03",
+      tag: { en: "Project 03", th: "โปรเจกต์ 03" },
       title: "Feane",
-      desc: "E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.",
-      role: "Fullstack Developer",
+      desc: {
+        en: "E-commerce storefront with full auth flow, SQLite backend, and ERD-driven schema design.",
+        th: "หน้าร้านค้าออนไลน์ระบบ Full-stack พร้อมระบบยืนยันตัวตน (Auth Flow) และฐานข้อมูล SQLite ออกแบบโครงสร้างตาม ERD"
+      },
+      role: { en: "Fullstack Developer", th: "Fullstack Developer" },
       stack: "Bootstrap · jQuery · Express",
       link: "#",
       figLabel: "FIG. 03 — FEANE",
-      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="400" height="300" fill="#0b0b08"/>
-          <g stroke="#3a382f" stroke-width="1">
-            <line x1="0" y1="75" x2="400" y2="75"/>
-            <line x1="0" y1="225" x2="400" y2="225"/>
-            <line x1="200" y1="0" x2="200" y2="300"/>
-          </g>
-          <g stroke="#8f8d80" stroke-width="1" fill="none">
-            <polygon points="150,110 200,85 250,110 200,135"/>
-            <polygon points="150,110 150,170 200,195 200,135"/>
-            <polygon points="250,110 250,170 200,195 200,135"/>
-          </g>
-          <g stroke="#c1461b" stroke-width="1.5" fill="none">
-            <polygon points="165,120 200,102 235,120 200,138"/>
-            <line x1="200" y1="138" x2="200" y2="175"/>
-          </g>
-          <circle cx="90" cy="110" r="4" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <line x1="94" y1="110" x2="150" y2="135" stroke="#3a382f" stroke-dasharray="2,2"/>
-          <circle cx="310" cy="170" r="4" fill="#c1461b"/>
-          <line x1="250" y1="135" x2="306" y2="170" stroke="#3a382f" stroke-dasharray="2,2"/>
-        </svg>`
+      visualHtml: `<img src="assets/PROJECTS/FA.png" alt="Feane">`
     },
     {
-      tag: "Project 04",
-      title: "RevRoute",
-      desc: "Gamified driving-safety app concept with crash detection — pitched Shark-Tank style.",
-      role: "Product / Pitch",
-      stack: "Product · Pitch Deck",
-      link: "#",
-      figLabel: "FIG. 04 — REVROUTE",
-      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="400" height="300" fill="#0b0b08"/>
-          <g stroke="#3a382f" stroke-width="1">
-            <line x1="0" y1="0" x2="400" y2="300"/>
-            <line x1="400" y1="0" x2="0" y2="300"/>
-            <line x1="200" y1="0" x2="200" y2="300"/>
-            <line x1="0" y1="150" x2="400" y2="150"/>
-          </g>
-          <circle cx="200" cy="150" r="100" fill="none" stroke="#3a382f" stroke-width="1"/>
-          <circle cx="200" cy="150" r="70" fill="none" stroke="#8f8d80" stroke-width="1" stroke-dasharray="6,4"/>
-          <circle cx="200" cy="150" r="40" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <path d="M 50 150 L 140 150 L 155 110 L 170 190 L 185 80 L 200 210 L 215 130 L 230 165 L 245 150 L 350 150" fill="none" stroke="#c1461b" stroke-width="1.8"/>
-          <circle cx="270" cy="100" r="5" fill="#c1461b"/>
-          <circle cx="270" cy="100" r="12" fill="none" stroke="#c1461b" stroke-width="1" opacity="0.6"/>
-        </svg>`
+      tag: { en: "Project 04", th: "โปรเจกต์ 04" },
+      title: "PixelPulse Studio",
+      desc: {
+        en: "T-Pop interactive platform & artist community web application with responsive UI, real-time interactions, and modern web architecture.",
+        th: "เว็บแอปพลิเคชันคอมมูนิตี้และแพลตฟอร์มอินเทอร์แอคทีฟ T-Pop รองรับการโหวต การจัดอันดับ และดีไซน์แบบ Responsive"
+      },
+      role: { en: "Frontend / Full-stack Developer", th: "Frontend / Full-stack Developer" },
+      stack: "React · Vite · TypeScript",
+      link: "https://github.com/Biwjustwork/Tpop-Project.git",
+      figLabel: "FIG. 04 — PIXELPULSE STUDIO",
+      visualHtml: `<img src="assets/PROJECTS/Tpop1.png" alt="PixelPulse Studio">`
     }
   ];
 
@@ -1335,20 +1516,20 @@
 
     projectModalContent.innerHTML = `
       <div class="pf-meta">
-        <div class="pf-tag">${project.tag}</div>
-        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${project.title}</h3>
-        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${project.desc}</p>
+        <div class="pf-tag">${getText(project.tag)}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${getText(project.title)}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${getText(project.desc)}</p>
         <div class="pf-facts" style="margin-bottom: 24px;">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${project.role}</span>
+            <span class="spec-label">${i18n[currentLang].roleLabel}</span>
+            <span class="spec-value">${getText(project.role)}</span>
           </div>
           <div>
-            <span class="spec-label">Stack</span>
+            <span class="spec-label">${i18n[currentLang].stackLabel}</span>
             <span class="spec-value">${project.stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="${project.link}" target="_blank" rel="noopener">View Repository →</a>
+        <a class="pf-link" href="${project.link}" target="_blank" rel="noopener">${i18n[currentLang].viewRepo}</a>
       </div>
       <div class="pf-visual frame">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1373,20 +1554,20 @@
 
     projectPreviewArea.innerHTML = `
       <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
-        <div class="pf-tag">${project.tag}</div>
-        <h3 class="pf-title">${project.title}</h3>
-        <p class="pf-desc">${project.desc}</p>
+        <div class="pf-tag">${getText(project.tag)}</div>
+        <h3 class="pf-title">${getText(project.title)}</h3>
+        <p class="pf-desc">${getText(project.desc)}</p>
         <div class="pf-facts">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${project.role}</span>
+            <span class="spec-label">${i18n[currentLang].roleLabel}</span>
+            <span class="spec-value">${getText(project.role)}</span>
           </div>
           <div>
-            <span class="spec-label">Stack</span>
+            <span class="spec-label">${i18n[currentLang].stackLabel}</span>
             <span class="spec-value">${project.stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="javascript:void(0)" id="projectDetailsBtn">Read Details [↗]</a>
+        <a class="pf-link" href="javascript:void(0)" id="projectDetailsBtn">${i18n[currentLang].readDetails}</a>
       </div>
       <div class="pf-visual frame" id="projectVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1411,17 +1592,19 @@
   function renderProjectGrid() {
     const grid = document.getElementById('projectGrid');
     if (!grid) return;
-    grid.innerHTML = projectsData.map((project, idx) => `
+    grid.innerHTML = projectsData.map((project, idx) => {
+      const descText = getText(project.desc);
+      return `
       <div class="p-card" data-index="${idx}">
         <div>
-          <div class="p-tag">${project.tag}</div>
-          <h3>${project.title}</h3>
-          <p>${project.desc.length > 90 ? project.desc.substring(0, 87) + '...' : project.desc}</p>
+          <div class="p-tag">${getText(project.tag)}</div>
+          <h3>${getText(project.title)}</h3>
+          <p>${descText.length > 90 ? descText.substring(0, 87) + '...' : descText}</p>
         </div>
         <div class="p-stack">${project.stack.toUpperCase()}</div>
         <span class="plus">+</span>
       </div>
-    `).join('');
+    `}).join('');
 
     grid.querySelectorAll('.p-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -1438,101 +1621,113 @@
   // ==================== 03 CERTIFICATES ====================
   const certsData = [
     {
-      tag: "Certificate — 01",
-      title: "อบรม TCC UX/UI",
-      desc: "ผ่านการฝึกอบรมหลักสูตร UX/UI Foundation Program โดย บริษัท ที.ซี.ซี. เทคโนโลยี จำกัด ณ วิทยาลัยศิลปะ สื่อ และเทคโนโลยี มหาวิทยาลัยเชียงใหม่",
-      role: "UX/UI Trainee",
+      tag: { en: "Certificate — 01", th: "เกียรติบัตร — 01" },
+      title: { en: "TCC UX/UI Training Program", th: "อบรม TCC UX/UI" },
+      desc: {
+        en: "Completed UX/UI Foundation Program by T.C.C. Technology Co., Ltd. at College of Arts, Media and Technology, Chiang Mai University.",
+        th: "ผ่านการฝึกอบรมหลักสูตร UX/UI Foundation Program โดย บริษัท ที.ซี.ซี. เทคโนโลยี จำกัด ณ วิทยาลัยศิลปะ สื่อ และเทคโนโลยี มหาวิทยาลัยเชียงใหม่"
+      },
+      role: { en: "UX/UI Trainee", th: "UX/UI Trainee" },
       stack: "TCC Tech · CAMT CMU",
-      link: "assets/TCC.jpg",
+      link: "assets/CERTIFICATES/TCC.jpg",
       images: [
         {
-          url: "assets/TCC.jpg",
+          url: "assets/CERTIFICATES/TCC.jpg",
           label: "CERT. 01.A — TCC UX/UI (CERTIFICATE)"
         },
         {
-          url: "assets/tcc-workshop.jpg",
+          url: "assets/CERTIFICATES/tcc-workshop.jpg",
           label: "ACT. 01.B — TCC WORKSHOP SESSION"
         }
       ]
     },
     {
-      tag: "CMU MOOC — 02",
-      title: "Skills4Life: ตรรกะ & การแก้ปัญหา",
-      desc: "ชุดเกียรติบัตรด้านการคิดวิเคราะห์ การสืบค้นหาข้อมูลส่วนสำคัญ การให้เหตุผลอย่างมีตรรกะ ความเข้าใจในอคติ และการแก้ปัญหาอย่างเป็นระบบ (รวม 4 หลักสูตร)",
-      role: "Lifelong Learner",
+      tag: { en: "CMU MOOC — 02", th: "CMU MOOC — 02" },
+      title: { en: "Skills4Life: Logic & Problem Solving", th: "Skills4Life: ตรรกะ & การแก้ปัญหา" },
+      desc: {
+        en: "Analytical thinking, identifying key information, logical reasoning, cognitive bias awareness, and systematic problem solving.",
+        th: "ชุดเกียรติบัตรด้านการคิดวิเคราะห์ การสืบค้นหาข้อมูลส่วนสำคัญ การให้เหตุผลอย่างมีตรรกะ ความเข้าใจในอคติ และการแก้ปัญหาอย่างเป็นระบบ"
+      },
+      role: { en: "Lifelong Learner", th: "Lifelong Learner" },
       stack: "Logic · Bias · Problem Solving",
-      link: "assets/IMG_8276.jpg",
+      link: "assets/CERTIFICATES/IMG_8276.jpg",
       images: [
         {
-          url: "assets/IMG_8276.jpg",
+          url: "assets/CERTIFICATES/IMG_8276.jpg",
           label: "CERT. 02.1 — การสืบค้นหาข้อมูลส่วนสำคัญ (23 ก.ค. 2568)"
         },
         {
-          url: "assets/IMG_8277.jpg",
+          url: "assets/CERTIFICATES/IMG_8277.jpg",
           label: "CERT. 02.2 — การให้เหตุผลอย่างมีตรรกะ (23 ก.ค. 2568)"
         },
         {
-          url: "assets/IMG_8269.jpg",
+          url: "assets/CERTIFICATES/IMG_8269.jpg",
           label: "CERT. 02.3 — ความเข้าใจในอคติ (23 ก.ค. 2568)"
         },
         {
-          url: "assets/IMG_8278.jpg",
+          url: "assets/CERTIFICATES/IMG_8278.jpg",
           label: "CERT. 02.4 — การแก้ปัญหาอย่างเป็นระบบ (23 ก.ค. 2568)"
         }
       ]
     },
     {
-      tag: "CMU MOOC — 03",
-      title: "Skills4Life: สื่อสาร & ความยืดหยุ่น",
-      desc: "ชุดเกียรติบัตรด้านการสื่อสาร พลังแห่งการเล่าเรื่องและการพูดในที่สาธารณะ การฟังอย่างใส่ใจ การสื่อความหมาย และความคิดแบบคล่องแคล่ว – ยืดหยุ่น (รวม 5 หลักสูตร)",
-      role: "Lifelong Learner",
+      tag: { en: "CMU MOOC — 03", th: "CMU MOOC — 03" },
+      title: { en: "Skills4Life: Communication & Agility", th: "Skills4Life: สื่อสาร & ความยืดหยุ่น" },
+      desc: {
+        en: "Storytelling power, public speaking, active listening, creating meaning, and agile/flexible thinking.",
+        th: "ชุดเกียรติบัตรด้านการสื่อสาร พลังแห่งการเล่าเรื่องและการพูดในที่สาธารณะ การฟังอย่างใส่ใจ การสื่อความหมาย และความคิดแบบคล่องแคล่ว – ยืดหยุ่น"
+      },
+      role: { en: "Lifelong Learner", th: "Lifelong Learner" },
       stack: "Storytelling · Listening · Agile",
-      link: "assets/Q&A.png",
+      link: "assets/CERTIFICATES/Q&A.png",
       images: [
         {
-          url: "assets/Q&A.png",
+          url: "assets/CERTIFICATES/Q&A.png",
           label: "CERT. 03.1 — การถามในประเด็นที่ตรงจุด (30 ก.ค. 2568)"
         },
         {
-          url: "assets/Talk.png",
+          url: "assets/CERTIFICATES/Talk.png",
           label: "CERT. 03.2 — พลังแห่งการเล่าเรื่องและการพูดในที่สาธารณะ (30 ก.ค. 2568)"
         },
         {
-          url: "assets/IMG_8468.jpg",
+          url: "assets/CERTIFICATES/IMG_8468.jpg",
           label: "CERT. 03.3 — การฟังอย่างใส่ใจ (31 ก.ค. 2568)"
         },
         {
-          url: "assets/IMG_8517.jpg",
+          url: "assets/CERTIFICATES/IMG_8517.jpg",
           label: "CERT. 03.4 — การสร้างและการสื่อความหมาย (1 ส.ค. 2568)"
         },
         {
-          url: "assets/Agile.png",
+          url: "assets/CERTIFICATES/Agile.png",
           label: "CERT. 03.5 — ความคิดแบบคล่องแคล่ว – ยืดหยุ่น (6 ส.ค. 2568)"
         }
       ]
     },
     {
-      tag: "CMU MOOC — 04",
-      title: "Skills4Life: บริหาร & ความคิดสร้างสรรค์",
-      desc: "ชุดเกียรติบัตรด้านการบริหารเวลาและการจัดลำดับความสำคัญ การพัฒนาแผนงานโครงการ ความคิดสร้างสรรค์และจินตนาการ และการสร้างมุมมองใหม่ ๆ (รวม 4 หลักสูตร)",
-      role: "Lifelong Learner",
+      tag: { en: "CMU MOOC — 04", th: "CMU MOOC — 04" },
+      title: { en: "Skills4Life: Management & Creativity", th: "Skills4Life: บริหาร & ความคิดสร้างสรรค์" },
+      desc: {
+        en: "Time management, prioritization, project work-plan development, creative imagination, and adopting fresh perspectives.",
+        th: "ชุดเกียรติบัตรด้านการบริหารเวลาและการจัดลำดับความสำคัญ การพัฒนาแผนงานโครงการ ความคิดสร้างสรรค์และจินตนาการ และการสร้างมุมมองใหม่ ๆ"
+      },
+      role: { en: "Lifelong Learner", th: "Lifelong Learner" },
       stack: "Time Mgmt · Project Dev · Creativity",
-      link: "assets/Time Management And Prioritization.png",
+      link: "assets/CERTIFICATES/Time Management And Prioritization.png",
       images: [
         {
-          url: "assets/Time Management And Prioritization.png",
+          url: "assets/CERTIFICATES/Time Management And Prioritization.png",
           label: "CERT. 04.1 — การบริหารเวลาและการลำดับความสำคัญ (6 ส.ค. 2568)"
         },
         {
-          url: "assets/Work-Plan Development.png",
+          url: "assets/CERTIFICATES/Work-Plan Development.png",
           label: "CERT. 04.2 — การพัฒนาแผนงานโดยเทคนิคการบริหารโครงการ (6 ส.ค. 2568)"
         },
         {
-          url: "assets/cav3.png",
+          url: "assets/CERTIFICATES/cav3.png",
           label: "CERT. 04.3 — ความคิดสร้างสรรค์และจินตนาการ (13 ส.ค. 2568)"
         },
         {
-          url: "assets/Adopting different perspectives.png",
+          url: "assets/CERTIFICATES/Adopting different perspectives.png",
           label: "CERT. 04.4 — การสร้างมุมมองและทัศนะใหม่ ๆ (13 ส.ค. 2568)"
         }
       ]
@@ -1590,31 +1785,31 @@
 
     certModalContent.innerHTML = `
       <div class="pf-meta">
-        <div class="pf-tag">${cert.tag}</div>
-        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${cert.title}</h3>
-        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${cert.desc}</p>
+        <div class="pf-tag">${getText(cert.tag)}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${getText(cert.title)}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${getText(cert.desc)}</p>
         <div class="pf-facts" style="margin-bottom: 24px;">
           <div>
-            <span class="spec-label">Issuer</span>
+            <span class="spec-label">${i18n[currentLang].issuerLabel}</span>
             <span class="spec-value">${cert.stack}</span>
           </div>
           <div>
-            <span class="spec-label">Status</span>
-            <span class="spec-value">VERIFIED [✓]</span>
+            <span class="spec-label">${i18n[currentLang].statusLabel}</span>
+            <span class="spec-value">${i18n[currentLang].statusVerified}</span>
           </div>
         </div>
-        <a class="pf-link" href="${currentImg.url}" target="_blank" rel="noopener">Open High-Res [↗]</a>
+        <a class="pf-link" href="${currentImg.url}" target="_blank" rel="noopener">${i18n[currentLang].openHighRes}</a>
       </div>
       <div class="pf-visual frame">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
-        <img src="${currentImg.url}" alt="${cert.title}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);transition:opacity .2s ease;">
+        <img src="${currentImg.url}" alt="${getText(cert.title)}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);transition:opacity .2s ease;">
         <span class="pf-visual-label" style="bottom: 12px; right: 12px;">${currentImg.label}</span>
       </div>
       ${hasMultiple ? `
         <div class="modal-viewmore-row">
           <button class="viewmore-btn" id="certModalViewMoreBtn" type="button">
-            <span>VIEWMORE (${certModalImgIndex + 1}/${cert.images.length}) ⇄</span>
+            <span>${i18n[currentLang].viewMore} (${certModalImgIndex + 1}/${cert.images.length}) ⇄</span>
           </button>
         </div>
       ` : ''}
@@ -1650,24 +1845,24 @@
 
     certPreviewArea.innerHTML = `
       <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
-        <div class="pf-tag">${cert.tag}</div>
-        <h3 class="pf-title">${cert.title}</h3>
-        <p class="pf-desc">${cert.desc}</p>
+        <div class="pf-tag">${getText(cert.tag)}</div>
+        <h3 class="pf-title">${getText(cert.title)}</h3>
+        <p class="pf-desc">${getText(cert.desc)}</p>
         <div class="pf-facts">
           <div>
-            <span class="spec-label">Issuer</span>
+            <span class="spec-label">${i18n[currentLang].issuerLabel}</span>
             <span class="spec-value">${cert.stack}</span>
           </div>
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${cert.role}</span>
+            <span class="spec-label">${i18n[currentLang].roleLabel}</span>
+            <span class="spec-value">${getText(cert.role)}</span>
           </div>
         </div>
         <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:4px;">
-          <a class="pf-link" href="javascript:void(0)" id="certDetailsBtn">View Certificate [↗]</a>
+          <a class="pf-link" href="javascript:void(0)" id="certDetailsBtn">${i18n[currentLang].viewCert}</a>
           ${hasMultiple ? `
             <button class="viewmore-btn" id="certPreviewViewMoreBtn" style="font-size:.66rem; padding:6px 14px; border-width:1px;" type="button">
-              <span>VIEWMORE (${certPreviewImgIndex + 1}/${cert.images.length}) ⇄</span>
+              <span>${i18n[currentLang].viewMore} (${certPreviewImgIndex + 1}/${cert.images.length}) ⇄</span>
             </button>
           ` : ''}
         </div>
@@ -1675,7 +1870,7 @@
       <div class="pf-visual frame" id="certVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
-        <img src="${currentImg.url}" alt="${cert.title}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);">
+        <img src="${currentImg.url}" alt="${getText(cert.title)}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);">
         <span class="pf-visual-label">${currentImg.label}</span>
       </div>
     `;
@@ -1706,17 +1901,19 @@
   function renderCertGrid() {
     const grid = document.getElementById('certGrid');
     if (!grid) return;
-    grid.innerHTML = certsData.map((cert, idx) => `
+    grid.innerHTML = certsData.map((cert, idx) => {
+      const descText = getText(cert.desc);
+      return `
       <div class="p-card" data-index="${idx}">
         <div>
-          <div class="p-tag">${cert.tag}</div>
-          <h3>${cert.title}</h3>
-          <p>${cert.desc.length > 90 ? cert.desc.substring(0, 87) + '...' : cert.desc}</p>
+          <div class="p-tag">${getText(cert.tag)}</div>
+          <h3>${getText(cert.title)}</h3>
+          <p>${descText.length > 90 ? descText.substring(0, 87) + '...' : descText}</p>
         </div>
         <div class="p-stack">${cert.stack.toUpperCase()}</div>
         <span class="plus">+</span>
       </div>
-    `).join('');
+    `}).join('');
 
     grid.querySelectorAll('.p-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -1733,40 +1930,52 @@
   // ==================== 05 SELF-DEVELOPMENT ====================
   const selfDevData = [
     {
-      tag: "Poster Design — 01",
+      tag: { en: "Poster Design — 01", th: "ออกแบบโปสเตอร์ — 01" },
       title: "Toyota GR86 JDM Poster",
-      desc: "ผลงานการออกแบบโปสเตอร์สไตล์ JDM & Japanese Cyberpunk ผสมผสาน Automotive Visual, จัดวางระบบ Typography ภาษาญี่ปุ่น, Spec Sheet ของเครื่องยนต์ FA24D และกราฟิก Halftone โตเกียวทาวเวอร์",
-      role: "Graphic & Poster Designer",
+      desc: {
+        en: "JDM & Japanese Cyberpunk automotive visual design with Japanese typography, FA24D engine specs, and Tokyo Tower halftone graphic.",
+        th: "ผลงานการออกแบบโปสเตอร์สไตล์ JDM & Japanese Cyberpunk ผสมผสาน Automotive Visual, จัดวางระบบ Typography ภาษาญี่ปุ่น, Spec Sheet เครื่องยนต์ FA24D และกราฟิก Halftone โตเกียวทาวเวอร์"
+      },
+      role: { en: "Graphic & Poster Designer", th: "Graphic & Poster Designer" },
       stack: "Photoshop · Typography · Layout Design",
       link: "assets/SELF-DEVELOPMENT/FH6-GR86-Poster.png",
       figLabel: "DEV. 01 — TOYOTA GR86 JDM POSTER",
       visualHtml: `<img src="assets/SELF-DEVELOPMENT/FH6-GR86-Poster.png" alt="Toyota GR86 JDM Poster" style="width:100%;height:100%;object-fit:cover;">`
     },
     {
-      tag: "Futuristic Art — 02",
+      tag: { en: "Futuristic Art — 02", th: "ศิลปะอนาคต — 02" },
       title: "NRC EM3 MOTO Poster",
-      desc: "การออกแบบโปสเตอร์คอนเซปต์ Neo-Futurism & Liquid Chrome Typography ร่วมกับสตรีทแฟชั่นและมอเตอร์สปอร์ต ผสมผสาน 3D Chrome Lettering และการจัดวางกริด Layout สไตล์ Sci-Fi Magazine",
-      role: "Visual & Concept Designer",
+      desc: {
+        en: "Neo-Futurism & Liquid Chrome Typography concept poster combining street fashion and motorsport with 3D Chrome lettering.",
+        th: "การออกแบบโปสเตอร์คอนเซปต์ Neo-Futurism & Liquid Chrome Typography ร่วมกับสตรีทแฟชั่นและมอเตอร์สปอร์ต ผสมผสาน 3D Chrome Lettering และการจัดวางกริด Layout สไตล์ Sci-Fi Magazine"
+      },
+      role: { en: "Visual & Concept Designer", th: "Visual & Concept Designer" },
       stack: "Chrome Typography · Poster Art · Layout",
       link: "assets/SELF-DEVELOPMENT/NutPoster.png",
       figLabel: "DEV. 02 — NRC EM3 MOTO POSTER",
       visualHtml: `<img src="assets/SELF-DEVELOPMENT/NutPoster.png" alt="NRC EM3 MOTO Poster" style="width:100%;height:100%;object-fit:cover;">`
     },
     {
-      tag: "Visual FX — 03",
+      tag: { en: "Visual FX — 03", th: "วิชวลเอฟเฟกต์ — 03" },
       title: "Cyberpunk HUD Tracking Art",
-      desc: "งานศิลปะภาพถ่ายผสมผสาน Sci-Fi UI HUD Tracking, Coordinate Mapping และบรรยากาศ Night Street จำลองระบบ Tracking วิเคราะห์พิกัดเล็งเป้าแบบ Futuristic Sci-Fi HUD บนภาพถ่ายบุคคลจริง",
-      role: "Photo Retoucher & UI Overlay Artist",
+      desc: {
+        en: "Sci-Fi HUD tracking and coordinate mapping photo artwork simulating futuristic target acquisition system over live photography.",
+        th: "งานศิลปะภาพถ่ายผสมผสาน Sci-Fi UI HUD Tracking, Coordinate Mapping และบรรยากาศ Night Street จำลองระบบ Tracking วิเคราะห์พิกัดเล็งเป้าแบบ Futuristic Sci-Fi HUD บนภาพถ่ายบุคคลจริง"
+      },
+      role: { en: "Photo Retoucher & UI Overlay Artist", th: "Photo Retoucher & UI Overlay Artist" },
       stack: "HUD Tracking · Photo Retouch · Vector UI",
       link: "assets/SELF-DEVELOPMENT/IMG_1615.PNG",
       figLabel: "DEV. 03 — CYBERPUNK HUD OVERLAY",
       visualHtml: `<img src="assets/SELF-DEVELOPMENT/IMG_1615.PNG" alt="Cyberpunk HUD Tracking Art" style="width:100%;height:100%;object-fit:cover;">`
     },
     {
-      tag: "Creative Media — 04",
+      tag: { en: "Creative Media — 04", th: "สื่อสร้างสรรค์ — 04" },
       title: "AR Music Player & Superbike Visual",
-      desc: "งาน Visual Manipulation & Compositing ผสมผสานภาพถ่าย Superbike (BMW S1000RR) เข้ากับ Augmented Reality Glass UI Music Player (KEEP UP - Odetari) ในบรรยากาศ Scenic Mountain Viewpoint",
-      role: "Creative Compositor",
+      desc: {
+        en: "Visual manipulation blending BMW S1000RR superbike with Augmented Reality glass music player UI (KEEP UP - Odetari) in mountain view.",
+        th: "งาน Visual Manipulation & Compositing ผสมผสานภาพถ่าย Superbike (BMW S1000RR) เข้ากับ Augmented Reality Glass UI Music Player (KEEP UP - Odetari) ในบรรยากาศ Scenic Mountain Viewpoint"
+      },
+      role: { en: "Creative Compositor", th: "Creative Compositor" },
       stack: "Glassmorphism AR · Compositing · Retouch",
       link: "assets/SELF-DEVELOPMENT/copy_40B069B9-8FF1-46E8-9989-278C33926FDC.jpeg",
       figLabel: "DEV. 04 — AR MUSIC PLAYER & SUPERBIKE",
@@ -1816,20 +2025,20 @@
 
     selfDevModalContent.innerHTML = `
       <div class="pf-meta">
-        <div class="pf-tag">${item.tag}</div>
-        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${item.title}</h3>
-        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${item.desc}</p>
+        <div class="pf-tag">${getText(item.tag)}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${getText(item.title)}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${getText(item.desc)}</p>
         <div class="pf-facts" style="margin-bottom: 24px;">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${item.role}</span>
+            <span class="spec-label">${i18n[currentLang].roleLabel}</span>
+            <span class="spec-value">${getText(item.role)}</span>
           </div>
           <div>
-            <span class="spec-label">Focus</span>
+            <span class="spec-label">${i18n[currentLang].focusLabel}</span>
             <span class="spec-value">${item.stack}</span>
           </div>
         </div>
-        ${item.link !== 'javascript:void(0)' ? `<a class="pf-link" href="${item.link}" target="_blank" rel="noopener">View Full Photo [↗]</a>` : ''}
+        ${item.link !== 'javascript:void(0)' ? `<a class="pf-link" href="${item.link}" target="_blank" rel="noopener">${i18n[currentLang].viewFullPhoto}</a>` : ''}
       </div>
       <div class="pf-visual frame">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1854,20 +2063,20 @@
 
     selfDevPreviewArea.innerHTML = `
       <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
-        <div class="pf-tag">${item.tag}</div>
-        <h3 class="pf-title">${item.title}</h3>
-        <p class="pf-desc">${item.desc}</p>
+        <div class="pf-tag">${getText(item.tag)}</div>
+        <h3 class="pf-title">${getText(item.title)}</h3>
+        <p class="pf-desc">${getText(item.desc)}</p>
         <div class="pf-facts">
           <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">${item.role}</span>
+            <span class="spec-label">${i18n[currentLang].roleLabel}</span>
+            <span class="spec-value">${getText(item.role)}</span>
           </div>
           <div>
-            <span class="spec-label">Focus</span>
+            <span class="spec-label">${i18n[currentLang].focusLabel}</span>
             <span class="spec-value">${item.stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="javascript:void(0)" id="selfDevDetailsBtn">Read Details [↗]</a>
+        <a class="pf-link" href="javascript:void(0)" id="selfDevDetailsBtn">${i18n[currentLang].readDetails}</a>
       </div>
       <div class="pf-visual frame" id="selfDevVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
@@ -1892,17 +2101,19 @@
   function renderSelfDevGrid() {
     const grid = document.getElementById('selfDevGrid');
     if (!grid) return;
-    grid.innerHTML = selfDevData.map((item, idx) => `
+    grid.innerHTML = selfDevData.map((item, idx) => {
+      const descText = getText(item.desc);
+      return `
       <div class="p-card" data-index="${idx}">
         <div>
-          <div class="p-tag">${item.tag}</div>
-          <h3>${item.title}</h3>
-          <p>${item.desc.length > 90 ? item.desc.substring(0, 87) + '...' : item.desc}</p>
+          <div class="p-tag">${getText(item.tag)}</div>
+          <h3>${getText(item.title)}</h3>
+          <p>${descText.length > 90 ? descText.substring(0, 87) + '...' : descText}</p>
         </div>
         <div class="p-stack">${item.stack.toUpperCase()}</div>
         <span class="plus">+</span>
       </div>
-    `).join('');
+    `}).join('');
 
     grid.querySelectorAll('.p-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -1916,15 +2127,8 @@
     });
   }
 
-  // Initialize all sections
-  renderProjectGrid();
-  renderPreviewProject(0);
-
-  renderCertGrid();
-  renderPreviewCert(0);
-
-  renderSelfDevGrid();
-  renderPreviewSelfDev(0);
+  // Initialize all sections with current language
+  setLanguage(currentLang);
 
   // Global ESC close for any open modal
   window.addEventListener('keydown', (e) => {
@@ -2000,7 +2204,7 @@
               - ShowPro: Student portfolio &amp; co-op portal (React/Vite/TS/Tailwind)<br>
               - M-SPEC: Dyno tuning booking system (JS/Node/Express/SQLite)<br>
               - Feane: E-commerce storefront (Bootstrap/jQuery/Express)<br>
-              - RevRoute: Gamified driving safety app pitch
+              - PixelPulse Studio: T-Pop interactive platform (React/Vite/TS)
             `;
             break;
           case 'certs':
@@ -2038,44 +2242,17 @@
     }
   })();
 
-  // ==================== CUSTOM CURSOR ====================
-  const cursor = document.getElementById('customCursor');
-  if (cursor && window.matchMedia('(pointer: fine)').matches) {
-    document.documentElement.classList.add('custom-cursor-enabled');
-    
-    let hasMoved = false;
-
-    window.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      if (!hasMoved) {
-        hasMoved = true;
-        cursor.style.opacity = '1';
-      }
+  // ==================== BACK TO TOP ====================
+  document.querySelectorAll('a[href="#top"], .back-top').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
     });
-
-    const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .pf-link, .back-top, .p-card, .viewmore-btn';
-    
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(clickables)) {
-        cursor.classList.add('hover');
-      }
-    });
-
-    document.addEventListener('mouseout', (e) => {
-      if (!e.target.closest(clickables)) {
-        cursor.classList.remove('hover');
-      }
-    });
-
-    document.addEventListener('mouseleave', () => {
-      cursor.style.opacity = '0';
-    });
-
-    document.addEventListener('mouseenter', () => {
-      if (hasMoved) cursor.style.opacity = '1';
-    });
-  }
+  });
 </script>
 </body>
 </html>
