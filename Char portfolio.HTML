@@ -220,14 +220,14 @@
     grid-template-columns:.85fr 1.15fr;
     gap:44px;
     margin-bottom:22px;
-    min-height:310px;
+    min-height:330px;
     align-items:center;
   }
   .pf-meta{
     padding:6px 6px 6px 0;
     display:flex;
     flex-direction:column;
-    height:310px;
+    height:330px;
   }
   .pf-tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;}
   .pf-title{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.08;margin-bottom:16px;}
@@ -244,24 +244,40 @@
   .pf-link:hover{gap:13px;color:var(--signal);border-color:var(--signal);}
 
   .pf-visual{
-    background:var(--graphite);
+    background:#0b0b08;
     position:relative;
-    height:310px;
+    height:330px;
     overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--line);
   }
-  .pf-visual svg{position:absolute;inset:0;width:100%;height:100%;}
+  .pf-visual svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .pf-visual img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:radial-gradient(circle at center, #181814 0%, #090906 100%);
+    transition:transform .3s ease, opacity .2s ease;
+  }
+  .pf-visual:hover img{transform:scale(1.02);}
   .pf-visual .pf-visual-label{
-    position:absolute;bottom:18px;right:20px;z-index:2;
-    font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--paper);text-transform:uppercase;opacity:.85;
+    position:absolute;bottom:14px;right:16px;z-index:2;
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--paper);text-transform:uppercase;opacity:.9;
+    background:rgba(11,11,8,0.85);padding:4px 10px;border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(4px);
   }
 
   .project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
   .p-card{
     background:var(--graphite);color:var(--paper);
-    padding:28px 24px;min-height:190px;
+    padding:26px 22px;min-height:205px;
     display:flex;flex-direction:column;justify-content:space-between;
     position:relative;
-    transition:background .3s ease;
+    transition:background .3s ease, border-color .3s ease;
     cursor:pointer;
   }
   .p-card:hover{background:var(--graphite-soft);}
@@ -271,7 +287,7 @@
   }
   .p-card .p-tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:#8f8d80;text-transform:uppercase;margin-bottom:auto;}
   .p-card h3{font-family:var(--display);font-size:1.35rem;line-height:1.12;margin:14px 0 8px;}
-  .p-card p{font-size:.78rem;color:#a9a79b;max-width:26ch;}
+  .p-card p{font-size:.78rem;color:#a9a79b;max-width:28ch;line-height:1.45;}
   .p-card .p-stack{font-family:var(--mono);font-size:.64rem;color:#726f61;margin-top:14px;letter-spacing:.04em;}
   .p-card .plus{position:absolute;bottom:16px;right:18px;color:#8f8d80;font-size:.9rem;}
 
@@ -315,6 +331,43 @@
     }
   }
 
+  .viewmore-btn {
+    font-family: var(--mono);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    padding: 9px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all .2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .viewmore-btn:hover {
+    background: var(--signal) !important;
+    color: var(--paper) !important;
+    border-color: var(--signal) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(193, 70, 27, 0.25);
+  }
+  .modal-viewmore-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 1px dashed var(--line);
+    position: relative;
+    width: 100%;
+  }
+
   /* ===== about + skills ===== */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);}
   .split > div{background:var(--paper);padding:clamp(40px,5vw,64px);}
@@ -337,6 +390,159 @@
   .skill-list li span.n{color:var(--ink-soft);font-size:.7rem;}
   .skills-visual{margin-top:30px;display:flex;justify-content:flex-end;}
   .skills-visual svg{width:120px;opacity:.5;}
+
+  /* ===== Self-Development / Certificates ===== */
+  .self-dev-block{
+    margin-top:40px;
+    padding-top:28px;
+    border-top:1px dashed var(--line);
+  }
+  .self-dev-title{
+    font-family:var(--display);
+    font-size:1.15rem;
+    letter-spacing:.02em;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .self-dev-title .sec-subtag{
+    font-family:var(--mono);
+    font-size:.65rem;
+    color:var(--ink-soft);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+  }
+  .cert-card{
+    background:var(--graphite);
+    color:var(--paper);
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    position:relative;
+  }
+  .cert-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--signal);
+    box-shadow:0 8px 24px rgba(11,11,8,0.25);
+  }
+  .cert-card-img-wrap{
+    width:100%;
+    aspect-ratio:4/3;
+    overflow:hidden;
+    background:#1c1c17;
+    position:relative;
+  }
+  .cert-card-img-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s ease;
+  }
+  .cert-card:hover .cert-card-img-wrap img{
+    transform:scale(1.05);
+  }
+  .cert-card-body{
+    padding:12px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    background:var(--graphite);
+  }
+  .cert-card-tag{
+    font-family:var(--mono);
+    font-size:.6rem;
+    color:#8f8d80;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .cert-card-name{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:.85rem;
+    color:var(--paper);
+    line-height:1.3;
+  }
+  .cert-card-date{
+    font-family:var(--mono);
+    font-size:.62rem;
+    color:#a9a79b;
+    margin-top:2px;
+  }
+
+  /* Certificate Lightbox Modal */
+  .cert-modal{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(16px,4vw,36px);
+  }
+  .cert-modal.open{display:flex;}
+  .cert-modal-backdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(11,11,8,0.8);
+    backdrop-filter:blur(8px);
+    cursor:pointer;
+  }
+  .cert-modal-box{
+    background:var(--graphite);
+    color:var(--paper);
+    border:1px solid var(--line);
+    position:relative;
+    z-index:100000;
+    max-width:820px;
+    width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    animation:modalSlideIn .25s ease forwards;
+  }
+  .cert-modal-img{
+    width:100%;
+    max-height:60vh;
+    object-fit:contain;
+    background:#000;
+    display:block;
+  }
+  .cert-modal-info{
+    padding:20px 24px;
+  }
+  .cert-modal-close{
+    position:absolute;
+    top:16px;
+    right:16px;
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    border:1px solid rgba(255,255,255,0.2);
+    padding:6px 12px;
+    background:rgba(0,0,0,0.6);
+    color:var(--paper);
+    cursor:pointer;
+    z-index:10;
+    transition:all .2s ease;
+  }
+  .cert-modal-close:hover{
+    color:var(--signal) !important;
+    border-color:var(--signal) !important;
+  }
+
+  @media (max-width:600px){
+    .cert-grid{grid-template-columns:1fr;}
+  }
 
   /* ===== contact ===== */
   .contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;}
@@ -471,9 +677,21 @@
   }
   .modal-content-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 40px;
     align-items: center;
+  }
+  .modal-content-grid .pf-meta {
+    height: auto;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .modal-content-grid .pf-visual {
+    height: 380px;
+    min-height: 380px;
+    width: 100%;
   }
   .modal-next-btn {
     position: absolute;
@@ -607,8 +825,11 @@
   <ul>
     <li><a href="#top"><span class="nav-index">01</span>Home</a></li>
     <li><a href="#projects"><span class="nav-index">02</span>Projects</a></li>
-    <li><a href="#about"><span class="nav-index">03</span>About</a></li>
-    <li><a href="#contact"><span class="nav-index">04</span>Contact</a></li>
+    <li><a href="#certificates"><span class="nav-index">03</span>Certificates</a></li>
+    <li><a href="#about"><span class="nav-index">04</span>About</a></li>
+    <li><a href="#self-development"><span class="nav-index">05</span>Self-Development</a></li>
+    <li><a href="#contact"><span class="nav-index">06</span>Contact</a></li>
+    <li><a href="#terminal-section"><span class="nav-index">07</span>Terminal</a></li>
   </ul>
 </nav>
 
@@ -675,124 +896,128 @@
   </a>
 </section>
 
-<!-- ============ PROJECTS ============ -->
+<!-- ============ 02 PROJECTS ============ -->
 <section id="projects">
   <div class="wrap">
     <div class="sec-head">
       <h2>PROJECTS</h2>
-      <span class="idx">// 01</span>
+      <span class="idx">// 02</span>
     </div>
 
     <div class="project-feature" id="activeProjectArea">
-      <div class="pf-meta">
-        <div class="pf-tag">Featured — Project 01</div>
-        <h3 class="pf-title">ShowPro</h3>
-        <p class="pf-desc">Student portfolio &amp; co-op management platform for CAMT / DII. Built the entire frontend layer — editable project cards, dark mode, and full TH/EN language switching.</p>
-        <div class="pf-facts">
-          <div>
-            <span class="spec-label">Role</span>
-            <span class="spec-value">UX Engineer</span>
-          </div>
-          <div>
-            <span class="spec-label">Stack</span>
-            <span class="spec-value">React / Vite / TS / Tailwind</span>
-          </div>
-        </div>
-        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">Read Details [↗]</a>
-      </div>
-      <div class="pf-visual frame" id="featuredVisualBtn" style="cursor: pointer;">
-        <span class="cnr tl" style="border-color:var(--paper)"></span>
-        <span class="cnr br" style="border-color:var(--paper)"></span>
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="400" height="300" fill="#0b0b08"/>
-          <g stroke="#3a382f" stroke-width="1">
-            <line x1="0" y1="60" x2="400" y2="60"/>
-            <line x1="0" y1="150" x2="400" y2="150"/>
-            <line x1="0" y1="240" x2="400" y2="240"/>
-            <line x1="100" y1="0" x2="100" y2="300"/>
-            <line x1="300" y1="0" x2="300" y2="300"/>
-          </g>
-          <circle cx="200" cy="150" r="70" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <circle cx="200" cy="150" r="46" fill="none" stroke="#8f8d80" stroke-width="1"/>
-          <rect x="170" y="120" width="60" height="60" fill="none" stroke="#c1461b" stroke-width="1.4" transform="rotate(45 200 150)"/>
-          <circle cx="200" cy="150" r="3" fill="#c1461b"/>
-          <line x1="200" y1="20" x2="200" y2="80" stroke="#8f8d80" stroke-width="1"/>
-          <line x1="200" y1="220" x2="200" y2="280" stroke="#8f8d80" stroke-width="1"/>
-        </svg>
-        <span class="pf-visual-label">FIG. 01 — SHOWPRO</span>
-      </div>
+      <!-- Dynamic Project Feature -->
     </div>
 
     <div class="project-grid" id="projectGrid">
-      <!-- Dynamic Project Cards will be loaded here -->
+      <!-- Dynamic Project Cards -->
     </div>
   </div>
 </section>
 
-<!-- ============ ABOUT + SKILLS ============ -->
+<!-- ============ 03 CERTIFICATES ============ -->
+<section id="certificates">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>CERTIFICATES</h2>
+      <span class="idx">// 03</span>
+    </div>
+
+    <div class="project-feature" id="activeCertArea">
+      <!-- Dynamic Certificate Feature -->
+    </div>
+
+    <div class="project-grid" id="certGrid" style="grid-template-columns: repeat(2, 1fr);">
+      <!-- Dynamic Certificate Cards -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 ABOUT + SKILLS ============ -->
 <section id="about" style="padding-top:0;">
-  <div class="split">
-    <div>
-      <div class="sec-head" style="margin-bottom:26px;">
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">ABOUT</h2>
-        <span class="idx">// 02</span>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="sec-head" style="margin-bottom:26px;">
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">ABOUT</h2>
+          <span class="idx">// 04</span>
+        </div>
+        <div class="about-photo frame">
+          <span class="cnr tl"></span><span class="cnr br"></span>
+          <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="var(--ink)" stroke-width="1">
+              <rect x="30" y="20" width="140" height="120"/>
+              <line x1="30" y1="20" x2="170" y2="140"/>
+              <line x1="170" y1="20" x2="30" y2="140"/>
+              <circle cx="100" cy="80" r="34"/>
+            </g>
+          </svg>
+        </div>
+        <div class="about-cap">Frontend / UX — 2026</div>
+        <p class="about-statement">I build interfaces that feel deliberate, not default.</p>
+        <p class="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
       </div>
-      <div class="about-photo frame">
-        <span class="cnr tl"></span><span class="cnr br"></span>
-        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="none" stroke="var(--ink)" stroke-width="1">
-            <rect x="30" y="20" width="140" height="120"/>
-            <line x1="30" y1="20" x2="170" y2="140"/>
-            <line x1="170" y1="20" x2="30" y2="140"/>
-            <circle cx="100" cy="80" r="34"/>
-          </g>
-        </svg>
-      </div>
-      <div class="about-cap">Frontend / UX — 2026</div>
-      <p class="about-statement">I build interfaces that feel deliberate, not default.</p>
-      <p class="about-sub">CAMT · DII, Chiang Mai University. Currently seeking a co-op placement as a Frontend Developer.</p>
-    </div>
 
-    <div>
-      <div class="sec-head" style="margin-bottom:26px;">
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">SKILLS</h2>
-        <span class="idx">// 03</span>
-      </div>
-      <ul class="skill-list">
-        <li><span>JavaScript</span><span class="n">01</span></li>
-        <li><span>TypeScript</span><span class="n">02</span></li>
-        <li><span>React</span><span class="n">03</span></li>
-        <li><span>Vite</span><span class="n">04</span></li>
-        <li><span>Tailwind CSS</span><span class="n">05</span></li>
-        <li><span>Express</span><span class="n">06</span></li>
-        <li><span>Prisma</span><span class="n">07</span></li>
-        <li><span>PostgreSQL</span><span class="n">08</span></li>
-        <li><span>Git / GitHub</span><span class="n">09</span></li>
-      </ul>
-      <div class="skills-visual">
-        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="none" stroke="var(--ink)" stroke-width="1">
-            <polygon points="60,6 111,33 111,87 60,114 9,87 9,33"/>
-            <polygon points="60,30 89,45 89,75 60,90 31,75 31,45"/>
-            <line x1="60" y1="6" x2="60" y2="30"/>
-            <line x1="111" y1="33" x2="89" y2="45"/>
-            <line x1="111" y1="87" x2="89" y2="75"/>
-            <line x1="60" y1="114" x2="60" y2="90"/>
-            <line x1="9" y1="87" x2="31" y2="75"/>
-            <line x1="9" y1="33" x2="31" y2="45"/>
-          </g>
-        </svg>
+      <div>
+        <div class="sec-head" style="margin-bottom:26px;">
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);">SKILLS</h2>
+          <span class="idx">// 04.B</span>
+        </div>
+        <ul class="skill-list">
+          <li><span>HTML / CSS</span><span class="n">01</span></li>
+          <li><span>JavaScript</span><span class="n">02</span></li>
+          <li><span>TypeScript</span><span class="n">03</span></li>
+          <li><span>React</span><span class="n">04</span></li>
+          <li><span>Vite</span><span class="n">05</span></li>
+          <li><span>Tailwind CSS</span><span class="n">06</span></li>
+          <li><span>Java</span><span class="n">07</span></li>
+          <li><span>Express</span><span class="n">08</span></li>
+          <li><span>Prisma</span><span class="n">09</span></li>
+          <li><span>PostgreSQL</span><span class="n">10</span></li>
+          <li><span>Git / GitHub</span><span class="n">11</span></li>
+        </ul>
+        <div class="skills-visual">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="var(--ink)" stroke-width="1">
+              <polygon points="60,6 111,33 111,87 60,114 9,87 9,33"/>
+              <polygon points="60,30 89,45 89,75 60,90 31,75 31,45"/>
+              <line x1="60" y1="6" x2="60" y2="30"/>
+              <line x1="111" y1="33" x2="89" y2="45"/>
+              <line x1="111" y1="87" x2="89" y2="75"/>
+              <line x1="60" y1="114" x2="60" y2="90"/>
+              <line x1="9" y1="87" x2="31" y2="75"/>
+              <line x1="9" y1="33" x2="31" y2="45"/>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
+<!-- ============ 05 SELF-DEVELOPMENT ============ -->
+<section id="self-development">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>SELF-DEVELOPMENT</h2>
+      <span class="idx">// 05</span>
+    </div>
+
+    <div class="project-feature" id="activeSelfDevArea">
+      <!-- Dynamic Self-Development Feature -->
+    </div>
+
+    <div class="project-grid" id="selfDevGrid">
+      <!-- Dynamic Self-Development Cards -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 CONTACT ============ -->
 <section id="contact">
   <div class="wrap">
     <div class="sec-head">
       <h2>CONTACT</h2>
-      <span class="idx">// 04</span>
+      <span class="idx">// 06</span>
     </div>
     <div class="contact-grid">
       <p class="contact-heading">Let's build something worth shipping.</p>
@@ -800,15 +1025,16 @@
       <div class="contact-links">
         <div>
           <div class="spec-label">Email</div>
-          <a class="spec-value" href="mailto:you@email.com">you@email.com</a>
+          <a class="spec-value" href="mailto:pangpond4343@gmail.com" style="display:block; width:fit-content;">pangpond4343@gmail.com</a>
+          <a class="spec-value" href="mailto:nattakorn_tanngam@cmu.ac.th" style="margin-top:4px; display:block; width:fit-content;">nattakorn_tanngam@cmu.ac.th</a>
         </div>
         <div>
           <div class="spec-label">GitHub</div>
           <a class="spec-value" href="https://github.com/Hitomaru-dk" target="_blank" rel="noopener">@Hitomaru-dk</a>
         </div>
         <div>
-          <div class="spec-label">LinkedIn</div>
-          <a class="spec-value" href="#">linkedin.com/in/yourname</a>
+          <div class="spec-label">Phone</div>
+          <a class="spec-value" href="tel:0621958664" style="display:block; width:fit-content;">062-195-8664</a>
         </div>
       </div>
 
@@ -828,6 +1054,44 @@
           <circle cx="80" cy="80" r="4" fill="var(--signal)"/>
         </svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 MINI TERMINAL ============ -->
+<section id="terminal-section" style="padding-top: 0; padding-bottom: 56px;">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:26px;">
+      <h2>TERMINAL</h2>
+      <span class="idx">// 07</span>
+    </div>
+    
+    <div class="terminal-container frame" style="background: #0b0b08; border: 1px solid var(--line); color: #00e5ff; font-family: var(--mono); padding: clamp(16px, 3vw, 24px); position: relative; font-size: 0.8rem;">
+      <span class="cnr tl" style="border-color: #00e5ff"></span>
+      <span class="cnr tr" style="border-color: #00e5ff"></span>
+      <span class="cnr bl" style="border-color: #00e5ff"></span>
+      <span class="cnr br" style="border-color: #00e5ff"></span>
+      
+      <!-- Terminal Header / Titlebar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(0, 229, 255, 0.3); padding-bottom: 10px; margin-bottom: 16px;">
+        <span style="font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(0, 229, 255, 0.7);">SYSTEM CONSOLE // RX-93-ν</span>
+        <span style="font-size: 0.65rem; color: var(--signal);">ONLINE</span>
+      </div>
+      
+      <!-- Terminal History/Log -->
+      <div id="terminalHistory" style="height: 180px; overflow-y: auto; line-height: 1.5; margin-bottom: 16px; scroll-behavior: smooth;">
+        <div>RX-93 HUD OS [Version 2.0.26]</div>
+        <div>[ INFO ] Try typing 'help' to unlock available commands.</div>
+        <div style="margin-bottom: 10px;">------------------------------------</div>
+      </div>
+      
+      <!-- Terminal Input Line -->
+      <form id="terminalForm" style="display: flex; align-items: center; width: 100%; margin: 0; padding: 0;">
+        <span style="margin-right: 8px; color: var(--paper); font-weight: bold; white-space: nowrap;">guest@rx93-hud:~$</span>
+        <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" 
+               style="flex: 1; background: transparent; border: none; outline: none; color: #00e5ff; font-family: var(--mono); font-size: 0.8rem; padding: 0; margin: 0; box-shadow: none;"
+               aria-label="Terminal input">
+      </form>
     </div>
   </div>
 </section>
@@ -859,8 +1123,38 @@
   </div>
 </div>
 
+<!-- ============ CERTIFICATE MODAL ============ -->
+<div class="project-modal" id="certModal" aria-hidden="true">
+  <div class="modal-backdrop" id="certModalBackdrop"></div>
+  <div class="modal-container frame">
+    <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
+    <button class="modal-close" id="certModalCloseBtn" aria-label="Close modal">CLOSE [X]</button>
+    <div class="modal-content-grid" id="certModalContent">
+      <!-- Dynamically populated by JS -->
+    </div>
+    <button class="modal-next-btn" id="certModalNextBtn" aria-label="Next Certificate">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ============ SELF-DEVELOPMENT MODAL ============ -->
+<div class="project-modal" id="selfDevModal" aria-hidden="true">
+  <div class="modal-backdrop" id="selfDevModalBackdrop"></div>
+  <div class="modal-container frame">
+    <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
+    <button class="modal-close" id="selfDevModalCloseBtn" aria-label="Close modal">CLOSE [X]</button>
+    <div class="modal-content-grid" id="selfDevModalContent">
+      <!-- Dynamically populated by JS -->
+    </div>
+    <button class="modal-next-btn" id="selfDevModalNextBtn" aria-label="Next Activity">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </button>
+  </div>
+</div>
+
 <script>
-  // mobile / overlay menu
+  // Mobile / overlay menu
   const menuBtn = document.getElementById('menuBtn');
   const navOverlay = document.getElementById('navOverlay');
   function closeMenu(){
@@ -877,7 +1171,7 @@
   });
   navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-  // live clock
+  // Live clock
   function tick(){
     const now = new Date();
     const h = String(now.getHours()).padStart(2,'0');
@@ -889,7 +1183,7 @@
   tick();
   setInterval(tick, 1000);
 
-  // Projects data
+  // ==================== 02 PROJECTS ====================
   const projectsData = [
     {
       tag: "Featured — Project 01",
@@ -899,7 +1193,7 @@
       stack: "React / Vite / TS / Tailwind",
       link: "https://github.com/PreturnPRO/dii-camt-showprogroup",
       figLabel: "FIG. 01 — SHOWPRO",
-      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="400" height="300" fill="#0b0b08"/>
           <g stroke="#3a382f" stroke-width="1">
             <line x1="0" y1="60" x2="400" y2="60"/>
@@ -924,7 +1218,7 @@
       stack: "JS · Node · Express · SQLite",
       link: "#",
       figLabel: "FIG. 02 — M-SPEC",
-      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="400" height="300" fill="#0b0b08"/>
           <g stroke="#3a382f" stroke-width="1">
             <line x1="0" y1="50" x2="400" y2="50"/>
@@ -951,7 +1245,7 @@
       stack: "Bootstrap · jQuery · Express",
       link: "#",
       figLabel: "FIG. 03 — FEANE",
-      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="400" height="300" fill="#0b0b08"/>
           <g stroke="#3a382f" stroke-width="1">
             <line x1="0" y1="75" x2="400" y2="75"/>
@@ -981,7 +1275,7 @@
       stack: "Product · Pitch Deck",
       link: "#",
       figLabel: "FIG. 04 — REVROUTE",
-      svg: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      visualHtml: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="400" height="300" fill="#0b0b08"/>
           <g stroke="#3a382f" stroke-width="1">
             <line x1="0" y1="0" x2="400" y2="300"/>
@@ -1000,54 +1294,46 @@
   ];
 
   let currentProjectIndex = 0;
-
-  const modal = document.getElementById('projectModal');
-  const modalContent = document.getElementById('modalContent');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  const modalNextBtn = document.getElementById('modalNextBtn');
+  const projectModal = document.getElementById('projectModal');
+  const projectModalContent = document.getElementById('modalContent');
+  const projectModalCloseBtn = document.getElementById('modalCloseBtn');
+  const projectModalBackdrop = document.getElementById('modalBackdrop');
+  const projectModalNextBtn = document.getElementById('modalNextBtn');
 
   function openProjectModal(index) {
     currentProjectIndex = index;
     renderModalProject(index);
-    if (modal) {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
+    if (projectModal) {
+      projectModal.classList.add('open');
+      projectModal.setAttribute('aria-hidden', 'false');
     }
     document.body.style.overflow = 'hidden';
   }
 
   function closeProjectModal() {
-    if (modal) {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
+    if (projectModal) {
+      projectModal.classList.remove('open');
+      projectModal.setAttribute('aria-hidden', 'true');
     }
     document.body.style.overflow = '';
   }
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
-  if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
-  
-  if (modalNextBtn) {
-    modalNextBtn.addEventListener('click', (e) => {
+  if (projectModalCloseBtn) projectModalCloseBtn.addEventListener('click', closeProjectModal);
+  if (projectModalBackdrop) projectModalBackdrop.addEventListener('click', closeProjectModal);
+  if (projectModalNextBtn) {
+    projectModalNextBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const nextIndex = (currentProjectIndex + 1) % projectsData.length;
       renderModalProject(nextIndex);
     });
   }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
-      closeProjectModal();
-    }
-  });
-
   function renderModalProject(index) {
     currentProjectIndex = index;
     const project = projectsData[index];
-    if (!modalContent) return;
+    if (!projectModalContent) return;
 
-    modalContent.innerHTML = `
+    projectModalContent.innerHTML = `
       <div class="pf-meta">
         <div class="pf-tag">${project.tag}</div>
         <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${project.title}</h3>
@@ -1067,29 +1353,25 @@
       <div class="pf-visual frame">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
-        ${project.svg}
+        ${project.visualHtml}
         <span class="pf-visual-label" style="bottom: 12px; right: 12px;">${project.figLabel}</span>
       </div>
     `;
 
-    // Highlight active card in grid
-    const cards = document.querySelectorAll('.p-card');
+    const cards = document.querySelectorAll('#projectGrid .p-card');
     cards.forEach((card, idx) => {
-      if (idx === index) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
-      }
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
     });
   }
 
-  const previewArea = document.getElementById('activeProjectArea');
+  const projectPreviewArea = document.getElementById('activeProjectArea');
 
   function renderPreviewProject(index) {
     const project = projectsData[index];
-    if (!previewArea) return;
+    if (!projectPreviewArea) return;
 
-    previewArea.innerHTML = `
+    projectPreviewArea.innerHTML = `
       <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
         <div class="pf-tag">${project.tag}</div>
         <h3 class="pf-title">${project.title}</h3>
@@ -1104,64 +1386,44 @@
             <span class="spec-value">${project.stack}</span>
           </div>
         </div>
-        <a class="pf-link" href="javascript:void(0)" id="featuredDetailsBtn">Read Details [↗]</a>
+        <a class="pf-link" href="javascript:void(0)" id="projectDetailsBtn">Read Details [↗]</a>
       </div>
-      <div class="pf-visual frame" id="featuredVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
+      <div class="pf-visual frame" id="projectVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
         <span class="cnr tl" style="border-color:var(--paper)"></span>
         <span class="cnr br" style="border-color:var(--paper)"></span>
-        ${project.svg}
+        ${project.visualHtml}
         <span class="pf-visual-label">${project.figLabel}</span>
       </div>
     `;
 
-    // Re-bind triggers for the new content inside previewArea
-    const featuredDetailsBtn = document.getElementById('featuredDetailsBtn');
-    const featuredVisualBtn = document.getElementById('featuredVisualBtn');
+    const btn = document.getElementById('projectDetailsBtn');
+    const visual = document.getElementById('projectVisualBtn');
+    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openProjectModal(index); });
+    if (visual) visual.addEventListener('click', () => openProjectModal(index));
 
-    if (featuredDetailsBtn) {
-      featuredDetailsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openProjectModal(index);
-      });
-    }
-    if (featuredVisualBtn) {
-      featuredVisualBtn.addEventListener('click', () => {
-        openProjectModal(index);
-      });
-    }
-
-    // Highlight active card in grid
-    const cards = document.querySelectorAll('.p-card');
+    const cards = document.querySelectorAll('#projectGrid .p-card');
     cards.forEach((card, idx) => {
-      if (idx === index) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
-      }
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
     });
   }
 
-  function renderGrid() {
+  function renderProjectGrid() {
     const grid = document.getElementById('projectGrid');
     if (!grid) return;
-    
-    grid.innerHTML = projectsData.map((project, idx) => {
-      return `
-        <div class="p-card" data-index="${idx}">
-          <div>
-            <div class="p-tag">${project.tag}</div>
-            <h3>${project.title}</h3>
-            <p>${project.desc.length > 90 ? project.desc.substring(0, 87) + '...' : project.desc}</p>
-          </div>
-          <div class="p-stack">${project.stack.toUpperCase()}</div>
-          <span class="plus">+</span>
+    grid.innerHTML = projectsData.map((project, idx) => `
+      <div class="p-card" data-index="${idx}">
+        <div>
+          <div class="p-tag">${project.tag}</div>
+          <h3>${project.title}</h3>
+          <p>${project.desc.length > 90 ? project.desc.substring(0, 87) + '...' : project.desc}</p>
         </div>
-      `;
-    }).join('');
+        <div class="p-stack">${project.stack.toUpperCase()}</div>
+        <span class="plus">+</span>
+      </div>
+    `).join('');
 
-    // Attach event listeners to cards
-    const cards = grid.querySelectorAll('.p-card');
-    cards.forEach((card) => {
+    grid.querySelectorAll('.p-card').forEach(card => {
       card.addEventListener('click', () => {
         const index = parseInt(card.getAttribute('data-index'), 10);
         openProjectModal(index);
@@ -1173,11 +1435,610 @@
     });
   }
 
-  // Initialize projects list and highlight first project
-  renderGrid();
+  // ==================== 03 CERTIFICATES ====================
+  const certsData = [
+    {
+      tag: "Certificate — 01",
+      title: "อบรม TCC UX/UI",
+      desc: "ผ่านการฝึกอบรมหลักสูตร UX/UI Foundation Program โดย บริษัท ที.ซี.ซี. เทคโนโลยี จำกัด ณ วิทยาลัยศิลปะ สื่อ และเทคโนโลยี มหาวิทยาลัยเชียงใหม่",
+      role: "UX/UI Trainee",
+      stack: "TCC Tech · CAMT CMU",
+      link: "assets/TCC.jpg",
+      images: [
+        {
+          url: "assets/TCC.jpg",
+          label: "CERT. 01.A — TCC UX/UI (CERTIFICATE)"
+        },
+        {
+          url: "assets/tcc-workshop.jpg",
+          label: "ACT. 01.B — TCC WORKSHOP SESSION"
+        }
+      ]
+    },
+    {
+      tag: "CMU MOOC — 02",
+      title: "Skills4Life: ตรรกะ & การแก้ปัญหา",
+      desc: "ชุดเกียรติบัตรด้านการคิดวิเคราะห์ การสืบค้นหาข้อมูลส่วนสำคัญ การให้เหตุผลอย่างมีตรรกะ ความเข้าใจในอคติ และการแก้ปัญหาอย่างเป็นระบบ (รวม 4 หลักสูตร)",
+      role: "Lifelong Learner",
+      stack: "Logic · Bias · Problem Solving",
+      link: "assets/IMG_8276.jpg",
+      images: [
+        {
+          url: "assets/IMG_8276.jpg",
+          label: "CERT. 02.1 — การสืบค้นหาข้อมูลส่วนสำคัญ (23 ก.ค. 2568)"
+        },
+        {
+          url: "assets/IMG_8277.jpg",
+          label: "CERT. 02.2 — การให้เหตุผลอย่างมีตรรกะ (23 ก.ค. 2568)"
+        },
+        {
+          url: "assets/IMG_8269.jpg",
+          label: "CERT. 02.3 — ความเข้าใจในอคติ (23 ก.ค. 2568)"
+        },
+        {
+          url: "assets/IMG_8278.jpg",
+          label: "CERT. 02.4 — การแก้ปัญหาอย่างเป็นระบบ (23 ก.ค. 2568)"
+        }
+      ]
+    },
+    {
+      tag: "CMU MOOC — 03",
+      title: "Skills4Life: สื่อสาร & ความยืดหยุ่น",
+      desc: "ชุดเกียรติบัตรด้านการสื่อสาร พลังแห่งการเล่าเรื่องและการพูดในที่สาธารณะ การฟังอย่างใส่ใจ การสื่อความหมาย และความคิดแบบคล่องแคล่ว – ยืดหยุ่น (รวม 5 หลักสูตร)",
+      role: "Lifelong Learner",
+      stack: "Storytelling · Listening · Agile",
+      link: "assets/Q&A.png",
+      images: [
+        {
+          url: "assets/Q&A.png",
+          label: "CERT. 03.1 — การถามในประเด็นที่ตรงจุด (30 ก.ค. 2568)"
+        },
+        {
+          url: "assets/Talk.png",
+          label: "CERT. 03.2 — พลังแห่งการเล่าเรื่องและการพูดในที่สาธารณะ (30 ก.ค. 2568)"
+        },
+        {
+          url: "assets/IMG_8468.jpg",
+          label: "CERT. 03.3 — การฟังอย่างใส่ใจ (31 ก.ค. 2568)"
+        },
+        {
+          url: "assets/IMG_8517.jpg",
+          label: "CERT. 03.4 — การสร้างและการสื่อความหมาย (1 ส.ค. 2568)"
+        },
+        {
+          url: "assets/Agile.png",
+          label: "CERT. 03.5 — ความคิดแบบคล่องแคล่ว – ยืดหยุ่น (6 ส.ค. 2568)"
+        }
+      ]
+    },
+    {
+      tag: "CMU MOOC — 04",
+      title: "Skills4Life: บริหาร & ความคิดสร้างสรรค์",
+      desc: "ชุดเกียรติบัตรด้านการบริหารเวลาและการจัดลำดับความสำคัญ การพัฒนาแผนงานโครงการ ความคิดสร้างสรรค์และจินตนาการ และการสร้างมุมมองใหม่ ๆ (รวม 4 หลักสูตร)",
+      role: "Lifelong Learner",
+      stack: "Time Mgmt · Project Dev · Creativity",
+      link: "assets/Time Management And Prioritization.png",
+      images: [
+        {
+          url: "assets/Time Management And Prioritization.png",
+          label: "CERT. 04.1 — การบริหารเวลาและการลำดับความสำคัญ (6 ส.ค. 2568)"
+        },
+        {
+          url: "assets/Work-Plan Development.png",
+          label: "CERT. 04.2 — การพัฒนาแผนงานโดยเทคนิคการบริหารโครงการ (6 ส.ค. 2568)"
+        },
+        {
+          url: "assets/cav3.png",
+          label: "CERT. 04.3 — ความคิดสร้างสรรค์และจินตนาการ (13 ส.ค. 2568)"
+        },
+        {
+          url: "assets/Adopting different perspectives.png",
+          label: "CERT. 04.4 — การสร้างมุมมองและทัศนะใหม่ ๆ (13 ส.ค. 2568)"
+        }
+      ]
+    }
+  ];
+
+  let currentCertIndex = 0;
+  let certModalImgIndex = 0;
+  let certPreviewImgIndex = 0;
+
+  const certModal = document.getElementById('certModal');
+  const certModalContent = document.getElementById('certModalContent');
+  const certModalCloseBtn = document.getElementById('certModalCloseBtn');
+  const certModalBackdrop = document.getElementById('certModalBackdrop');
+  const certModalNextBtn = document.getElementById('certModalNextBtn');
+
+  function openCertModal(index, imgIdx = 0) {
+    currentCertIndex = index;
+    certModalImgIndex = imgIdx;
+    renderModalCert(index, imgIdx);
+    if (certModal) {
+      certModal.classList.add('open');
+      certModal.setAttribute('aria-hidden', 'false');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCertModal() {
+    if (certModal) {
+      certModal.classList.remove('open');
+      certModal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.style.overflow = '';
+  }
+
+  if (certModalCloseBtn) certModalCloseBtn.addEventListener('click', closeCertModal);
+  if (certModalBackdrop) certModalBackdrop.addEventListener('click', closeCertModal);
+  if (certModalNextBtn) {
+    certModalNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIndex = (currentCertIndex + 1) % certsData.length;
+      certModalImgIndex = 0;
+      renderModalCert(nextIndex, 0);
+    });
+  }
+
+  function renderModalCert(index, imgIdx = 0) {
+    currentCertIndex = index;
+    certModalImgIndex = imgIdx;
+    const cert = certsData[index];
+    if (!certModalContent) return;
+
+    const currentImg = (cert.images && cert.images[certModalImgIndex]) ? cert.images[certModalImgIndex] : { url: cert.link, label: "CERT. 01 — PREVIEW" };
+    const hasMultiple = cert.images && cert.images.length > 1;
+
+    certModalContent.innerHTML = `
+      <div class="pf-meta">
+        <div class="pf-tag">${cert.tag}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${cert.title}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${cert.desc}</p>
+        <div class="pf-facts" style="margin-bottom: 24px;">
+          <div>
+            <span class="spec-label">Issuer</span>
+            <span class="spec-value">${cert.stack}</span>
+          </div>
+          <div>
+            <span class="spec-label">Status</span>
+            <span class="spec-value">VERIFIED [✓]</span>
+          </div>
+        </div>
+        <a class="pf-link" href="${currentImg.url}" target="_blank" rel="noopener">Open High-Res [↗]</a>
+      </div>
+      <div class="pf-visual frame">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        <img src="${currentImg.url}" alt="${cert.title}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);transition:opacity .2s ease;">
+        <span class="pf-visual-label" style="bottom: 12px; right: 12px;">${currentImg.label}</span>
+      </div>
+      ${hasMultiple ? `
+        <div class="modal-viewmore-row">
+          <button class="viewmore-btn" id="certModalViewMoreBtn" type="button">
+            <span>VIEWMORE (${certModalImgIndex + 1}/${cert.images.length}) ⇄</span>
+          </button>
+        </div>
+      ` : ''}
+    `;
+
+    if (hasMultiple) {
+      const vmBtn = document.getElementById('certModalViewMoreBtn');
+      if (vmBtn) {
+        vmBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const nextImg = (certModalImgIndex + 1) % cert.images.length;
+          renderModalCert(index, nextImg);
+        });
+      }
+    }
+
+    const cards = document.querySelectorAll('#certGrid .p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
+    });
+  }
+
+  const certPreviewArea = document.getElementById('activeCertArea');
+
+  function renderPreviewCert(index, imgIdx = 0) {
+    const cert = certsData[index];
+    certPreviewImgIndex = imgIdx;
+    if (!certPreviewArea) return;
+
+    const currentImg = (cert.images && cert.images[certPreviewImgIndex]) ? cert.images[certPreviewImgIndex] : { url: cert.link, label: "CERT. 01 — PREVIEW" };
+    const hasMultiple = cert.images && cert.images.length > 1;
+
+    certPreviewArea.innerHTML = `
+      <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
+        <div class="pf-tag">${cert.tag}</div>
+        <h3 class="pf-title">${cert.title}</h3>
+        <p class="pf-desc">${cert.desc}</p>
+        <div class="pf-facts">
+          <div>
+            <span class="spec-label">Issuer</span>
+            <span class="spec-value">${cert.stack}</span>
+          </div>
+          <div>
+            <span class="spec-label">Role</span>
+            <span class="spec-value">${cert.role}</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:4px;">
+          <a class="pf-link" href="javascript:void(0)" id="certDetailsBtn">View Certificate [↗]</a>
+          ${hasMultiple ? `
+            <button class="viewmore-btn" id="certPreviewViewMoreBtn" style="font-size:.66rem; padding:6px 14px; border-width:1px;" type="button">
+              <span>VIEWMORE (${certPreviewImgIndex + 1}/${cert.images.length}) ⇄</span>
+            </button>
+          ` : ''}
+        </div>
+      </div>
+      <div class="pf-visual frame" id="certVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        <img src="${currentImg.url}" alt="${cert.title}" style="width:100%;height:100%;object-fit:contain;background:radial-gradient(circle at center, #181814 0%, #090906 100%);">
+        <span class="pf-visual-label">${currentImg.label}</span>
+      </div>
+    `;
+
+    const btn = document.getElementById('certDetailsBtn');
+    const visual = document.getElementById('certVisualBtn');
+    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openCertModal(index, certPreviewImgIndex); });
+    if (visual) visual.addEventListener('click', () => openCertModal(index, certPreviewImgIndex));
+
+    if (hasMultiple) {
+      const vmBtn = document.getElementById('certPreviewViewMoreBtn');
+      if (vmBtn) {
+        vmBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const nextImg = (certPreviewImgIndex + 1) % cert.images.length;
+          renderPreviewCert(index, nextImg);
+        });
+      }
+    }
+
+    const cards = document.querySelectorAll('#certGrid .p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
+    });
+  }
+
+  function renderCertGrid() {
+    const grid = document.getElementById('certGrid');
+    if (!grid) return;
+    grid.innerHTML = certsData.map((cert, idx) => `
+      <div class="p-card" data-index="${idx}">
+        <div>
+          <div class="p-tag">${cert.tag}</div>
+          <h3>${cert.title}</h3>
+          <p>${cert.desc.length > 90 ? cert.desc.substring(0, 87) + '...' : cert.desc}</p>
+        </div>
+        <div class="p-stack">${cert.stack.toUpperCase()}</div>
+        <span class="plus">+</span>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.p-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        openCertModal(index);
+      });
+      card.addEventListener('mouseenter', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        renderPreviewCert(index);
+      });
+    });
+  }
+
+  // ==================== 05 SELF-DEVELOPMENT ====================
+  const selfDevData = [
+    {
+      tag: "Poster Design — 01",
+      title: "Toyota GR86 JDM Poster",
+      desc: "ผลงานการออกแบบโปสเตอร์สไตล์ JDM & Japanese Cyberpunk ผสมผสาน Automotive Visual, จัดวางระบบ Typography ภาษาญี่ปุ่น, Spec Sheet ของเครื่องยนต์ FA24D และกราฟิก Halftone โตเกียวทาวเวอร์",
+      role: "Graphic & Poster Designer",
+      stack: "Photoshop · Typography · Layout Design",
+      link: "assets/SELF-DEVELOPMENT/FH6-GR86-Poster.png",
+      figLabel: "DEV. 01 — TOYOTA GR86 JDM POSTER",
+      visualHtml: `<img src="assets/SELF-DEVELOPMENT/FH6-GR86-Poster.png" alt="Toyota GR86 JDM Poster" style="width:100%;height:100%;object-fit:cover;">`
+    },
+    {
+      tag: "Futuristic Art — 02",
+      title: "NRC EM3 MOTO Poster",
+      desc: "การออกแบบโปสเตอร์คอนเซปต์ Neo-Futurism & Liquid Chrome Typography ร่วมกับสตรีทแฟชั่นและมอเตอร์สปอร์ต ผสมผสาน 3D Chrome Lettering และการจัดวางกริด Layout สไตล์ Sci-Fi Magazine",
+      role: "Visual & Concept Designer",
+      stack: "Chrome Typography · Poster Art · Layout",
+      link: "assets/SELF-DEVELOPMENT/NutPoster.png",
+      figLabel: "DEV. 02 — NRC EM3 MOTO POSTER",
+      visualHtml: `<img src="assets/SELF-DEVELOPMENT/NutPoster.png" alt="NRC EM3 MOTO Poster" style="width:100%;height:100%;object-fit:cover;">`
+    },
+    {
+      tag: "Visual FX — 03",
+      title: "Cyberpunk HUD Tracking Art",
+      desc: "งานศิลปะภาพถ่ายผสมผสาน Sci-Fi UI HUD Tracking, Coordinate Mapping และบรรยากาศ Night Street จำลองระบบ Tracking วิเคราะห์พิกัดเล็งเป้าแบบ Futuristic Sci-Fi HUD บนภาพถ่ายบุคคลจริง",
+      role: "Photo Retoucher & UI Overlay Artist",
+      stack: "HUD Tracking · Photo Retouch · Vector UI",
+      link: "assets/SELF-DEVELOPMENT/IMG_1615.PNG",
+      figLabel: "DEV. 03 — CYBERPUNK HUD OVERLAY",
+      visualHtml: `<img src="assets/SELF-DEVELOPMENT/IMG_1615.PNG" alt="Cyberpunk HUD Tracking Art" style="width:100%;height:100%;object-fit:cover;">`
+    },
+    {
+      tag: "Creative Media — 04",
+      title: "AR Music Player & Superbike Visual",
+      desc: "งาน Visual Manipulation & Compositing ผสมผสานภาพถ่าย Superbike (BMW S1000RR) เข้ากับ Augmented Reality Glass UI Music Player (KEEP UP - Odetari) ในบรรยากาศ Scenic Mountain Viewpoint",
+      role: "Creative Compositor",
+      stack: "Glassmorphism AR · Compositing · Retouch",
+      link: "assets/SELF-DEVELOPMENT/copy_40B069B9-8FF1-46E8-9989-278C33926FDC.jpeg",
+      figLabel: "DEV. 04 — AR MUSIC PLAYER & SUPERBIKE",
+      visualHtml: `<img src="assets/SELF-DEVELOPMENT/copy_40B069B9-8FF1-46E8-9989-278C33926FDC.jpeg" alt="AR Music Player & Superbike Visual" style="width:100%;height:100%;object-fit:cover;">`
+    }
+  ];
+
+  let currentSelfDevIndex = 0;
+  const selfDevModal = document.getElementById('selfDevModal');
+  const selfDevModalContent = document.getElementById('selfDevModalContent');
+  const selfDevModalCloseBtn = document.getElementById('selfDevModalCloseBtn');
+  const selfDevModalBackdrop = document.getElementById('selfDevModalBackdrop');
+  const selfDevModalNextBtn = document.getElementById('selfDevModalNextBtn');
+
+  function openSelfDevModal(index) {
+    currentSelfDevIndex = index;
+    renderModalSelfDev(index);
+    if (selfDevModal) {
+      selfDevModal.classList.add('open');
+      selfDevModal.setAttribute('aria-hidden', 'false');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSelfDevModal() {
+    if (selfDevModal) {
+      selfDevModal.classList.remove('open');
+      selfDevModal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.style.overflow = '';
+  }
+
+  if (selfDevModalCloseBtn) selfDevModalCloseBtn.addEventListener('click', closeSelfDevModal);
+  if (selfDevModalBackdrop) selfDevModalBackdrop.addEventListener('click', closeSelfDevModal);
+  if (selfDevModalNextBtn) {
+    selfDevModalNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIndex = (currentSelfDevIndex + 1) % selfDevData.length;
+      renderModalSelfDev(nextIndex);
+    });
+  }
+
+  function renderModalSelfDev(index) {
+    currentSelfDevIndex = index;
+    const item = selfDevData[index];
+    if (!selfDevModalContent) return;
+
+    selfDevModalContent.innerHTML = `
+      <div class="pf-meta">
+        <div class="pf-tag">${item.tag}</div>
+        <h3 class="pf-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">${item.title}</h3>
+        <p class="pf-desc" style="max-width: 100%; margin-bottom: 20px;">${item.desc}</p>
+        <div class="pf-facts" style="margin-bottom: 24px;">
+          <div>
+            <span class="spec-label">Role</span>
+            <span class="spec-value">${item.role}</span>
+          </div>
+          <div>
+            <span class="spec-label">Focus</span>
+            <span class="spec-value">${item.stack}</span>
+          </div>
+        </div>
+        ${item.link !== 'javascript:void(0)' ? `<a class="pf-link" href="${item.link}" target="_blank" rel="noopener">View Full Photo [↗]</a>` : ''}
+      </div>
+      <div class="pf-visual frame">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        ${item.visualHtml}
+        <span class="pf-visual-label" style="bottom: 12px; right: 12px;">${item.figLabel}</span>
+      </div>
+    `;
+
+    const cards = document.querySelectorAll('#selfDevGrid .p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
+    });
+  }
+
+  const selfDevPreviewArea = document.getElementById('activeSelfDevArea');
+
+  function renderPreviewSelfDev(index) {
+    const item = selfDevData[index];
+    if (!selfDevPreviewArea) return;
+
+    selfDevPreviewArea.innerHTML = `
+      <div class="pf-meta" style="animation: previewFadeIn 0.3s ease forwards;">
+        <div class="pf-tag">${item.tag}</div>
+        <h3 class="pf-title">${item.title}</h3>
+        <p class="pf-desc">${item.desc}</p>
+        <div class="pf-facts">
+          <div>
+            <span class="spec-label">Role</span>
+            <span class="spec-value">${item.role}</span>
+          </div>
+          <div>
+            <span class="spec-label">Focus</span>
+            <span class="spec-value">${item.stack}</span>
+          </div>
+        </div>
+        <a class="pf-link" href="javascript:void(0)" id="selfDevDetailsBtn">Read Details [↗]</a>
+      </div>
+      <div class="pf-visual frame" id="selfDevVisualBtn" style="cursor: pointer; animation: previewFadeIn 0.3s ease forwards;">
+        <span class="cnr tl" style="border-color:var(--paper)"></span>
+        <span class="cnr br" style="border-color:var(--paper)"></span>
+        ${item.visualHtml}
+        <span class="pf-visual-label">${item.figLabel}</span>
+      </div>
+    `;
+
+    const btn = document.getElementById('selfDevDetailsBtn');
+    const visual = document.getElementById('selfDevVisualBtn');
+    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openSelfDevModal(index); });
+    if (visual) visual.addEventListener('click', () => openSelfDevModal(index));
+
+    const cards = document.querySelectorAll('#selfDevGrid .p-card');
+    cards.forEach((card, idx) => {
+      if (idx === index) card.classList.add('active');
+      else card.classList.remove('active');
+    });
+  }
+
+  function renderSelfDevGrid() {
+    const grid = document.getElementById('selfDevGrid');
+    if (!grid) return;
+    grid.innerHTML = selfDevData.map((item, idx) => `
+      <div class="p-card" data-index="${idx}">
+        <div>
+          <div class="p-tag">${item.tag}</div>
+          <h3>${item.title}</h3>
+          <p>${item.desc.length > 90 ? item.desc.substring(0, 87) + '...' : item.desc}</p>
+        </div>
+        <div class="p-stack">${item.stack.toUpperCase()}</div>
+        <span class="plus">+</span>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.p-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        openSelfDevModal(index);
+      });
+      card.addEventListener('mouseenter', () => {
+        const index = parseInt(card.getAttribute('data-index'), 10);
+        renderPreviewSelfDev(index);
+      });
+    });
+  }
+
+  // Initialize all sections
+  renderProjectGrid();
   renderPreviewProject(0);
 
-  // custom cursor implementation
+  renderCertGrid();
+  renderPreviewCert(0);
+
+  renderSelfDevGrid();
+  renderPreviewSelfDev(0);
+
+  // Global ESC close for any open modal
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeProjectModal();
+      closeCertModal();
+      closeSelfDevModal();
+    }
+  });
+
+  // ==================== 07 TERMINAL CONSOLE ENGINE ====================
+  (function() {
+    const input = document.getElementById('terminalInput');
+    const history = document.getElementById('terminalHistory');
+    const form = document.getElementById('terminalForm');
+    const container = document.querySelector('.terminal-container');
+
+    if (container && input) {
+      container.addEventListener('click', () => input.focus());
+    }
+
+    function scrollToBottom() {
+      if (history) history.scrollTop = history.scrollHeight;
+    }
+
+    if (form && input && history) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const cmdRaw = input.value;
+        const cmd = cmdRaw.trim().toLowerCase();
+        input.value = '';
+
+        const cmdLine = document.createElement('div');
+        cmdLine.innerHTML = `<span style="color: var(--paper); font-weight: bold;">guest@rx93-hud:~$</span> ${cmdRaw}`;
+        history.appendChild(cmdLine);
+
+        const outputLine = document.createElement('div');
+        outputLine.style.marginTop = '4px';
+        outputLine.style.marginBottom = '12px';
+
+        if (cmd === '') {
+          history.appendChild(outputLine);
+          scrollToBottom();
+          return;
+        }
+
+        switch (cmd) {
+          case 'help':
+            outputLine.innerHTML = `
+              Available commands:<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">whoami</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Print developer identity<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">projects</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Summaries of core projects<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">certs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: List verified certificates<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">selfdev</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: List workshops &amp; self-development<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">about</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Output education and specs<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">contact</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Output contact info<br>
+              &nbsp;&nbsp;<span style="color: var(--paper);">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Clear terminal console
+            `;
+            break;
+          case 'whoami':
+            outputLine.innerHTML = `Nattakorn Tanngam (Pangpond) // Frontend Developer &amp; IT Support · CAMT CMU`;
+            break;
+          case 'about':
+            outputLine.innerHTML = `
+              Unit: NATTAKORN TANNGAM<br>
+              Focus: React, TypeScript, Tailwind, UI/UX<br>
+              Education: CAMT, Chiang Mai University (DII)<br>
+              Status: Available for Co-op / Internship
+            `;
+            break;
+          case 'projects':
+            outputLine.innerHTML = `
+              - ShowPro: Student portfolio &amp; co-op portal (React/Vite/TS/Tailwind)<br>
+              - M-SPEC: Dyno tuning booking system (JS/Node/Express/SQLite)<br>
+              - Feane: E-commerce storefront (Bootstrap/jQuery/Express)<br>
+              - RevRoute: Gamified driving safety app pitch
+            `;
+            break;
+          case 'certs':
+            outputLine.innerHTML = `
+              - [01] อบรม TCC UX/UI (UX/UI Foundation Program - TCC Technology @ CAMT)<br>
+              - [02] เกียรติบัตร Skills4life (CMU MOOC: 13 โมดูลพัฒนาทักษะชีวิตและการทำงาน)
+            `;
+            break;
+          case 'selfdev':
+            outputLine.innerHTML = `
+              - [01] Toyota GR86 JDM Poster (Graphic &amp; Poster Design)<br>
+              - [02] NRC EM3 MOTO Poster (Futuristic Chrome Typography)<br>
+              - [03] Cyberpunk HUD Tracking Art (Photo Retouch &amp; Vector HUD)<br>
+              - [04] AR Music Player &amp; Superbike Visual (Compositing &amp; AR UI)
+            `;
+            break;
+          case 'contact':
+            outputLine.innerHTML = `
+              Email : pangpond4343@gmail.com, nattakorn_tanngam@cmu.ac.th<br>
+              Phone : 062-195-8664<br>
+              GitHub: github.com/Hitomaru-dk
+            `;
+            break;
+          case 'clear':
+            history.innerHTML = '';
+            scrollToBottom();
+            return;
+          default:
+            outputLine.innerHTML = `<span style="color: var(--signal);">Error: Command '${cmdRaw}' not recognized.</span> Type 'help' for options.`;
+        }
+
+        history.appendChild(outputLine);
+        scrollToBottom();
+      });
+    }
+  })();
+
+  // ==================== CUSTOM CURSOR ====================
   const cursor = document.getElementById('customCursor');
   if (cursor && window.matchMedia('(pointer: fine)').matches) {
     document.documentElement.classList.add('custom-cursor-enabled');
@@ -1193,8 +2054,7 @@
       }
     });
 
-    // Hover state detection
-    const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .pf-link, .back-top, .p-card';
+    const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .pf-link, .back-top, .p-card, .viewmore-btn';
     
     document.addEventListener('mouseover', (e) => {
       if (e.target.closest(clickables)) {
