@@ -901,6 +901,47 @@
     }
   }
 
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 99999;
+    color: var(--signal);
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, color 0.15s ease;
+    opacity: 0;
+    display: none;
+  }
+  .custom-cursor svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    animation: rotateStar 20s linear infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 1px 2px rgba(22, 22, 15, 0.2));
+  }
+  @keyframes rotateStar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .custom-cursor.hover {
+    color: #ff3b30;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  @media (pointer: fine) {
+    html.custom-cursor-enabled,
+    html.custom-cursor-enabled * {
+      cursor: none !important;
+    }
+    html.custom-cursor-enabled .custom-cursor {
+      display: block;
+    }
+  }
+
   /* Clickable elements red hover style */
   a:hover, button:hover, .pf-link:hover, .back-top:hover {
     color: #ff3b30 !important;
@@ -916,13 +957,20 @@
 </head>
 <body id="top">
 
+<!-- ============ CUSTOM CURSOR (STAR) ============ -->
+<div class="custom-cursor" id="customCursor" aria-hidden="true">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z"/>
+  </svg>
+</div>
+
 <!-- ============ HEADER ============ -->
 <header>
   <div class="header-inner">
     <div class="logo-wrap">
       <div class="logo">
         <span class="logo-mark" data-i18n="logoMark">NATTAKORN</span>
-        <span class="logo-sub">Frontend Dev · v2.0</span>
+        <span class="logo-sub">Frontend Dev · RX-93-V</span>
       </div>
       <div class="boxing-nu-badge">
         <img src="assets/pfp/boxing-nu.gif" class="boxing-nu-icon" alt="boxing-nu">
@@ -2253,6 +2301,45 @@
       });
     });
   });
+
+  // ==================== CUSTOM CURSOR (STAR) ====================
+  const cursor = document.getElementById('customCursor');
+  if (cursor && window.matchMedia('(pointer: fine)').matches) {
+    document.documentElement.classList.add('custom-cursor-enabled');
+    
+    let hasMoved = false;
+
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      if (!hasMoved) {
+        hasMoved = true;
+        cursor.style.opacity = '1';
+      }
+    });
+
+    const clickables = 'a, button, select, input, textarea, [role="button"], .menu-btn, .pf-link, .back-top, .p-card, .viewmore-btn, .lang-btn, .nav-lang-btn';
+    
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(clickables)) {
+        cursor.classList.add('hover');
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      if (!e.target.closest(clickables)) {
+        cursor.classList.remove('hover');
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      if (hasMoved) cursor.style.opacity = '1';
+    });
+  }
 </script>
 </body>
 </html>
